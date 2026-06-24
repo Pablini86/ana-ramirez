@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Hanken+Grotesk:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: #F5F0E8; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  a { text-decoration: none; color: inherit; }
+  @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  ::selection { background: var(--soft, oklch(0.90 0.045 40)); }
+
+  /* ===== TABLET ===== */
+  @media (max-width: 1000px) {
+    #inicio { grid-template-columns: 1fr !important; text-align: center; }
+    #inicio .hero-copy { display: flex; flex-direction: column; align-items: center; order: 2; }
+    #inicio .hero-photo { order: 1; margin-bottom: 8px; }
+    .grid-3 { grid-template-columns: 1fr 1fr !important; }
+    .grid-4 { grid-template-columns: 1fr 1fr !important; }
+    .sobre-grid { grid-template-columns: 1fr !important; text-align: center; }
+    .sobre-grid .sobre-copy { display: flex; flex-direction: column; align-items: center; }
+    .conoce-grid { grid-template-columns: 1fr !important; }
+    .price-pro { transform: none !important; }
+    .nav-links a.nav-page { display: none; }
+  }
+
+  /* ===== MÓVIL ===== */
+  @media (max-width: 620px) {
+    .grid-3 { grid-template-columns: 1fr !important; }
+    .hero-stats { flex-wrap: wrap; gap: 22px !important; }
+    .hero-photo-img { width: min(340px, 86vw) !important; }
+    .mini-clip { right: -8px !important; width: 96px !important; }
+    .hero-badge { left: -6px !important; }
+  }
+</style>
+</helmet>
+<div style="{{ rootStyle }}">
+
+  <!-- NAV -->
+  <header style="position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between; padding:18px clamp(20px,5vw,72px); background:rgba(245,240,232,0.82); backdrop-filter:blur(12px); border-bottom:1px solid rgba(33,29,24,0.07);">
+    <a href="#inicio" style="display:flex; align-items:baseline; gap:10px;">
+      <span style="font-family:'Instrument Serif',serif; font-size:25px; line-height:1; letter-spacing:0.2px;">Ana Daniela</span>
+      <span style="width:7px; height:7px; border-radius:50%; background:var(--accent, oklch(0.63 0.13 35)); display:inline-block;"></span>
+    </a>
+    <nav class="nav-links" style="display:flex; align-items:center; gap:clamp(14px,2vw,30px); font-size:14.5px; font-weight:500;">
+      <a href="#servicios" class="nav-page" style="opacity:0.78;" style-hover="opacity:1;">Servicios</a>
+      <a href="#portafolio" class="nav-page" style="opacity:0.78;" style-hover="opacity:1;">Portafolio</a>
+      <a href="#tarifas" class="nav-page" style="opacity:0.78;" style-hover="opacity:1;">Tarifas</a>
+      <a href="#sobre" class="nav-page" style="opacity:0.78;" style-hover="opacity:1;">Sobre mí</a>
+      <a href="#conoceme" class="nav-page" style="opacity:0.78;" style-hover="opacity:1;">Conóceme</a>
+      <a href="https://api.whatsapp.com/send/?phone=523316050763&amp;text&amp;type=phone_number&amp;app_absent=0" target="_blank" style="background:var(--accent, oklch(0.63 0.13 35)); color:#fff; padding:10px 18px; border-radius:999px; font-weight:600; font-size:14px;" style-hover="filter:brightness(1.06);">Hablemos</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section id="inicio" style="display:grid; grid-template-columns:1.05fr 0.95fr; gap:clamp(28px,5vw,72px); align-items:center; padding:clamp(48px,6vw,90px) clamp(20px,5vw,72px) clamp(56px,6vw,96px);">
+    <div class="hero-copy">
+      <div style="display:inline-flex; align-items:center; gap:9px; padding:7px 14px; border:1px solid rgba(33,29,24,0.14); border-radius:999px; font-size:13px; font-weight:600; letter-spacing:0.4px; text-transform:uppercase; opacity:0.8;">
+        <span style="width:6px; height:6px; border-radius:50%; background:var(--accent, oklch(0.63 0.13 35));"></span>
+        Creadora &amp; editora de video
+      </div>
+      <h1 style="font-family:'Instrument Serif',serif; font-weight:400; font-size:clamp(42px,6vw,80px); line-height:1.02; letter-spacing:-0.5px; margin-top:22px;">
+        Contenido que se siente real <span style="font-style:italic; color:var(--accent, oklch(0.63 0.13 35));">y vende por ti.</span>
+      </h1>
+      <p style="font-size:clamp(16px,1.5vw,19px); line-height:1.6; max-width:520px; margin-top:24px; opacity:0.82;">
+        UGC a cámara, edición para marcas, empresas y doctores, y videos branded sin locución. Yo me encargo de la idea, la grabación y la edición — tú solo publicas.
+      </p>
+      <div style="display:flex; flex-wrap:wrap; gap:14px; margin-top:34px;">
+        <a href="https://api.whatsapp.com/send/?phone=523316050763&amp;text&amp;type=phone_number&amp;app_absent=0" target="_blank" style="background:var(--accent, oklch(0.63 0.13 35)); color:#fff; padding:15px 26px; border-radius:999px; font-weight:600; font-size:15.5px;" style-hover="filter:brightness(1.06); transform:translateY(-1px);">Hablemos por WhatsApp</a>
+        <a href="#portafolio" style="background:transparent; color:#211D18; padding:15px 26px; border-radius:999px; font-weight:600; font-size:15.5px; border:1px solid rgba(33,29,24,0.2);" style-hover="border-color:#211D18;">Ver portafolio</a>
+      </div>
+      <div class="hero-stats" style="display:flex; gap:clamp(20px,3vw,40px); margin-top:46px;">
+        <div><div style="font-family:'Instrument Serif',serif; font-size:34px; line-height:1;">+3 años</div><div style="font-size:13.5px; opacity:0.62; margin-top:6px;">creando contenido</div></div>
+        <div style="width:1px; background:rgba(33,29,24,0.12);"></div>
+        <div><div style="font-family:'Instrument Serif',serif; font-size:34px; line-height:1;">UGC + Edición</div><div style="font-size:13.5px; opacity:0.62; margin-top:6px;">todo en un solo lugar</div></div>
+      </div>
+    </div>
+
+    <!-- HERO PHOTO -->
+    <div class="hero-photo" style="position:relative; justify-self:center;">
+      <div style="position:absolute; inset:-16px; background:var(--soft, oklch(0.90 0.045 40)); border-radius:28px; transform:rotate(-3deg);"></div>
+      <div class="hero-photo-img" style="position:relative; width:min(420px,80vw); aspect-ratio:4/5; border-radius:24px; overflow:hidden; border:8px solid #fff; box-shadow:0 30px 60px -28px rgba(33,29,24,0.4);">
+        <img src="ana.png" alt="Ana Daniela" style="width:100%; height:100%; object-fit:cover; object-position:50% 18%;">
+      </div>
+      <!-- badge -->
+      <div class="hero-badge" style="position:absolute; top:18px; left:-18px; background:#fff; padding:11px 16px; border-radius:14px; box-shadow:0 14px 30px -14px rgba(33,29,24,0.35); display:flex; align-items:center; gap:9px; font-weight:700; font-size:14px;">
+        <span style="width:9px; height:9px; border-radius:50%; background:var(--accent, oklch(0.63 0.13 35));"></span>
+        UGC + Edición
+      </div>
+      <!-- mini clip -->
+      <div class="mini-clip" style="position:absolute; bottom:-22px; right:-22px; width:118px; aspect-ratio:9/16; border-radius:16px; overflow:hidden; border:5px solid #fff; box-shadow:0 18px 36px -16px rgba(33,29,24,0.4); animation:floaty 5s ease-in-out infinite;">
+        <img src="miniclip.png" alt="Clip de Ana" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+        <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
+          <div style="width:38px; height:38px; border-radius:50%; background:rgba(255,255,255,0.92); display:flex; align-items:center; justify-content:center;">
+            <span style="width:0; height:0; border-top:7px solid transparent; border-bottom:7px solid transparent; border-left:11px solid var(--accent, oklch(0.63 0.13 35)); margin-left:3px;"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section id="servicios" style="padding:clamp(56px,7vw,104px) clamp(20px,5vw,72px); background:var(--tint, oklch(0.965 0.018 45));">
+    <div style="max-width:680px;">
+      <div style="font-size:13px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent, oklch(0.63 0.13 35));">Servicios</div>
+      <h2 style="font-family:'Instrument Serif',serif; font-weight:400; font-size:clamp(32px,4.4vw,54px); line-height:1.05; letter-spacing:-0.4px; margin-top:14px;">Tres formas de trabajar conmigo</h2>
+    </div>
+    <div class="grid-3" style="display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:48px;">
+      <div style="background:#fff; border-radius:20px; padding:34px 30px; border:1px solid rgba(33,29,24,0.06);">
+        <div style="font-family:'Instrument Serif',serif; font-size:30px; color:var(--accent, oklch(0.63 0.13 35)); line-height:1;">01</div>
+        <h3 style="font-size:22px; font-weight:700; margin-top:18px;">UGC a cámara</h3>
+        <p style="font-size:15.5px; line-height:1.6; opacity:0.78; margin-top:12px;">Aparezco yo. Reseñas, demos y testimonios auténticos tipo creador, grabados y editados listos para publicar en TikTok, Reels y anuncios.</p>
+      </div>
+      <div style="background:#fff; border-radius:20px; padding:34px 30px; border:1px solid rgba(33,29,24,0.06);">
+        <div style="font-family:'Instrument Serif',serif; font-size:30px; color:var(--accent, oklch(0.63 0.13 35)); line-height:1;">02</div>
+        <h3 style="font-size:22px; font-weight:700; margin-top:18px;">Edición de video</h3>
+        <p style="font-size:15.5px; line-height:1.6; opacity:0.78; margin-top:12px;">Me mandas tu material y yo lo convierto en algo que retiene: cortes, subtítulos, ritmo y branding. Ideal para marcas, empresas y profesionales.</p>
+      </div>
+      <div style="background:#fff; border-radius:20px; padding:34px 30px; border:1px solid rgba(33,29,24,0.06);">
+        <div style="font-family:'Instrument Serif',serif; font-size:30px; color:var(--accent, oklch(0.63 0.13 35)); line-height:1;">03</div>
+        <h3 style="font-size:22px; font-weight:700; margin-top:18px;">Videos branded sin locución</h3>
+        <p style="font-size:15.5px; line-height:1.6; opacity:0.78; margin-top:12px;">Contenido visual con música y texto en pantalla, sin voz. Perfecto para feed, anuncios y redes cuando la imagen habla por sí sola.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTAFOLIO -->
+  <section id="portafolio" style="padding:clamp(56px,7vw,104px) clamp(20px,5vw,72px);">
+    <div style="max-width:680px;">
+      <div style="font-size:13px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent, oklch(0.63 0.13 35));">Portafolio</div>
+      <h2 style="font-family:'Instrument Serif',serif; font-weight:400; font-size:clamp(32px,4.4vw,54px); line-height:1.05; letter-spacing:-0.4px; margin-top:14px;">Algunos de mis trabajos</h2>
+      <p style="font-size:16px; line-height:1.6; opacity:0.72; margin-top:14px;">Todos los proyectos en formato vertical, estilo reel. Pasa el cursor para reproducir y da clic para activar el sonido.</p>
+    </div>
+
+    <!-- Vertical clips -->
+    <div style="display:flex; align-items:center; gap:12px; margin-top:46px; margin-bottom:20px;">
+      <span style="font-size:14px; font-weight:700; letter-spacing:0.3px;">Clips verticales · UGC</span>
+      <span style="flex:1; height:1px; background:rgba(33,29,24,0.1);"></span>
+    </div>
+    <div class="grid-4" style="display:grid; grid-template-columns:repeat(4,1fr); gap:18px;">
+      <sc-for list="{{ ugcVideos }}" as="v" hint-placeholder-count="4">
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div onMouseEnter="{{ playVid }}" onMouseLeave="{{ pauseVid }}" onClick="{{ toggleSound }}" style="position:relative; aspect-ratio:9/16; border-radius:18px; overflow:hidden; background:#000; border:1px solid rgba(33,29,24,0.06); box-shadow:0 14px 30px -18px rgba(33,29,24,0.35); cursor:pointer;">
+            <video src="{{ v.src }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;"></video>
+            <div style="position:absolute; right:10px; bottom:10px; width:30px; height:30px; border-radius:50%; background:rgba(0,0,0,0.45); backdrop-filter:blur(4px); display:flex; align-items:center; justify-content:center; pointer-events:none;">
+              <span style="width:0; height:0; border-top:5px solid transparent; border-bottom:5px solid transparent; border-left:8px solid #fff; margin-left:2px;"></span>
+            </div>
+          </div>
+          <span style="font-size:13.5px; font-weight:500; opacity:0.72; padding-left:2px;">{{ v.label }}</span>
+        </div>
+      </sc-for>
+    </div>
+
+    <!-- Para profesionales / empresas -->
+    <div style="display:flex; align-items:center; gap:12px; margin-top:48px; margin-bottom:20px;">
+      <span style="font-size:14px; font-weight:700; letter-spacing:0.3px;">Edición para empresas y profesionales</span>
+      <span style="flex:1; height:1px; background:rgba(33,29,24,0.1);"></span>
+    </div>
+    <div class="grid-4" style="display:grid; grid-template-columns:repeat(4,1fr); gap:18px;">
+      <sc-for list="{{ proVideos }}" as="p" hint-placeholder-count="4">
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div onMouseEnter="{{ playVid }}" onMouseLeave="{{ pauseVid }}" onClick="{{ toggleSound }}" style="position:relative; aspect-ratio:9/16; border-radius:18px; overflow:hidden; background:#000; border:1px solid rgba(33,29,24,0.06); box-shadow:0 14px 30px -18px rgba(33,29,24,0.35); cursor:pointer;">
+            <video src="{{ p.src }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;"></video>
+            <div style="position:absolute; right:10px; bottom:10px; width:30px; height:30px; border-radius:50%; background:rgba(0,0,0,0.45); backdrop-filter:blur(4px); display:flex; align-items:center; justify-content:center; pointer-events:none;">
+              <span style="width:0; height:0; border-top:5px solid transparent; border-bottom:5px solid transparent; border-left:8px solid #fff; margin-left:2px;"></span>
+            </div>
+          </div>
+          <span style="font-size:13.5px; font-weight:500; opacity:0.72; padding-left:2px;">{{ p.label }}</span>
+        </div>
+      </sc-for>
+    </div>
+
+    <!-- Marcas -->
+    <div style="display:flex; align-items:center; gap:12px; margin-top:56px; margin-bottom:22px;">
+      <span style="font-size:14px; font-weight:700; letter-spacing:0.3px;">Han confiado en mí</span>
+      <span style="flex:1; height:1px; background:rgba(33,29,24,0.1);"></span>
+    </div>
+    <div class="grid-4" style="display:grid; grid-template-columns:repeat(4,1fr); gap:16px;">
+      <sc-for list="{{ brands }}" as="b">
+        <div style="display:flex; align-items:center; justify-content:center; height:96px; padding:14px; border-radius:14px; border:1px solid rgba(33,29,24,0.1); background:#fff; overflow:hidden;">
+          <img src="{{ b.src }}" alt="{{ b.name }}" style="max-width:100%; max-height:100%; object-fit:contain;">
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- TARIFAS -->
+  <sc-if value="{{ showPrices }}" hint-placeholder-val="{{ true }}">
+  <section id="tarifas" style="padding:clamp(56px,7vw,104px) clamp(20px,5vw,72px); background:#211D18; color:#F5F0E8;">
+    <div style="max-width:680px;">
+      <div style="font-size:13px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--soft, oklch(0.90 0.045 40));">Tarifas</div>
+      <h2 style="font-family:'Instrument Serif',serif; font-weight:400; font-size:clamp(32px,4.4vw,54px); line-height:1.05; letter-spacing:-0.4px; margin-top:14px;">Paquetes y precios</h2>
+    </div>
+    <div class="grid-3" style="display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:48px;">
+      <!-- UGC -->
+      <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); border-radius:22px; padding:34px 30px; display:flex; flex-direction:column;">
+        <div style="font-size:14px; font-weight:700; letter-spacing:0.5px; opacity:0.7;">UGC</div>
+        <div style="font-family:'Instrument Serif',serif; font-size:42px; line-height:1; margin-top:16px;">Desde $1,300<span style="font-size:16px; opacity:0.6; font-family:'Hanken Grotesk',sans-serif;"> MXN</span></div>
+        <div style="font-size:14px; opacity:0.6; margin-top:6px;">por video</div>
+        <div style="height:1px; background:rgba(255,255,255,0.12); margin:24px 0;"></div>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:13px; font-size:15px;">
+          <li style="display:flex; gap:10px;"><span style="color:var(--soft, oklch(0.90 0.045 40));">✓</span> 1 video UGC vertical (hasta 30s)</li>
+          <li style="display:flex; gap:10px;"><span style="color:var(--soft, oklch(0.90 0.045 40));">✓</span> Guión y concepto</li>
+          <li style="display:flex; gap:10px;"><span style="color:var(--soft, oklch(0.90 0.045 40));">✓</span> Grabación y edición</li>
+          <li style="display:flex; gap:10px;"><span style="color:var(--soft, oklch(0.90 0.045 40));">✓</span> 1 ronda de cambios</li>
+        </ul>
+        <a href="https://api.whatsapp.com/send/?phone=523316050763&amp;text&amp;type=phone_number&amp;app_absent=0" target="_blank" style="margin-top:28px; text-align:center; padding:13px; border-radius:999px; border:1px solid rgba(255,255,255,0.3); font-weight:600; font-size:15px;" style-hover="background:rgba(255,255,255,0.1);">Cotizar</a>
+      </div>
+      <!-- PRO highlight -->
+      <div class="price-pro" style="background:var(--accent, oklch(0.63 0.13 35)); color:#fff; border-radius:22px; padding:34px 30px; display:flex; flex-direction:column; position:relative; transform:translateY(-12px); box-shadow:0 30px 60px -28px rgba(0,0,0,0.6);">
+        <div style="position:absolute; top:-13px; left:50%; transform:translateX(-50%); background:#fff; color:#211D18; font-size:12px; font-weight:700; letter-spacing:0.5px; padding:6px 14px; border-radius:999px;">MÁS POPULAR</div>
+        <div style="font-size:14px; font-weight:700; letter-spacing:0.5px; opacity:0.85;">PRO</div>
+        <div style="font-family:'Instrument Serif',serif; font-size:42px; line-height:1; margin-top:16px;">Desde $3,000<span style="font-size:16px; opacity:0.75; font-family:'Hanken Grotesk',sans-serif;"> MXN</span></div>
+        <div style="font-size:14px; opacity:0.8; margin-top:6px;">paquete de 3 videos</div>
+        <div style="height:1px; background:rgba(255,255,255,0.25); margin:24px 0;"></div>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:13px; font-size:15px;">
+          <li style="display:flex; gap:10px;"><span>✓</span> 3 videos UGC verticales</li>
+          <li style="display:flex; gap:10px;"><span>✓</span> Guión, concepto y grabación</li>
+          <li style="display:flex; gap:10px;"><span>✓</span> Edición con subtítulos y branding</li>
+          <li style="display:flex; gap:10px;"><span>✓</span> 2 rondas de cambios</li>
+        </ul>
+        <a href="https://api.whatsapp.com/send/?phone=523316050763&amp;text&amp;type=phone_number&amp;app_absent=0" target="_blank" style="margin-top:28px; text-align:center; padding:13px; border-radius:999px; background:#fff; color:#211D18; font-weight:700; font-size:15px;" style-hover="filter:brightness(0.95);">Empezar</a>
+      </div>
+      <!-- Edición -->
+      <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); border-radius:22px; padding:34px 30px; display:flex; flex-direction:column;">
+        <div style="font-size:14px; font-weight:700; letter-spacing:0.5px; opacity:0.7;">EDICIÓN</div>
+        <div style="font-family:'Instrument Serif',serif; font-size:42px; line-height:1; margin-top:16px;">Desde $500<span style="font-size:16px; opacity:0.6; font-family:'Hanken Grotesk',sans-serif;"> MXN</span></div>
+        <div style="font-size:14px; opacity:0.6; margin-top:6px;">por video editado</div>
+        <div style="height:1px; background:rgba(255,255,255,0.12); margin:24px 0;"></div>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:13px; font-size:15px;">
+          <li style="display:flex; gap:10px;"><span style="color:var(--soft, oklch(0.90 0.045 40));">✓</span> Edición de tu material</li>
+          <li style="display:flex; gap:10px;"><span style="color:var(--soft, oklch(0.90 0.045 40));">✓</span> Cortes, ritmo y subtítulos</li>
+          <li style="display:flex; gap:10px;"><span style="color:var(--soft, oklch(0.90 0.045 40));">✓</span> Música y texto en pantalla</li>
+          <li style="display:flex; gap:10px;"><span style="color:var(--soft, oklch(0.90 0.045 40));">✓</span> Branding de marca</li>
+        </ul>
+        <a href="https://api.whatsapp.com/send/?phone=523316050763&amp;text&amp;type=phone_number&amp;app_absent=0" target="_blank" style="margin-top:28px; text-align:center; padding:13px; border-radius:999px; border:1px solid rgba(255,255,255,0.3); font-weight:600; font-size:15px;" style-hover="background:rgba(255,255,255,0.1);">Cotizar</a>
+      </div>
+    </div>
+    <p style="font-size:14px; opacity:0.55; margin-top:28px; text-align:center;">Los precios son base y pueden variar según el proyecto. ¿Algo a la medida? Escríbeme y lo platicamos.</p>
+  </section>
+  </sc-if>
+
+  <!-- SOBRE MI -->
+  <section id="sobre" class="sobre-grid" style="display:grid; grid-template-columns:0.85fr 1.15fr; gap:clamp(28px,5vw,68px); align-items:center; padding:clamp(56px,7vw,104px) clamp(20px,5vw,72px); background:var(--tint, oklch(0.965 0.018 45));">
+    <div style="position:relative; justify-self:center;">
+      <div style="position:absolute; inset:-14px; background:var(--soft, oklch(0.90 0.045 40)); border-radius:24px; transform:rotate(3deg);"></div>
+      <div style="position:relative; width:min(340px,75vw); aspect-ratio:1/1; border-radius:20px; overflow:hidden; border:7px solid #fff; box-shadow:0 24px 50px -26px rgba(33,29,24,0.4);">
+        <img src="ana.png" alt="Ana Daniela" style="width:100%; height:100%; object-fit:cover; object-position:50% 12%;">
+      </div>
+    </div>
+    <div class="sobre-copy">
+      <div style="font-size:13px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent, oklch(0.63 0.13 35));">Sobre mí</div>
+      <h2 style="font-family:'Instrument Serif',serif; font-weight:400; font-size:clamp(30px,4vw,50px); line-height:1.06; letter-spacing:-0.4px; margin-top:14px;">Hola, soy Ana Daniela</h2>
+      <p style="font-size:17px; line-height:1.7; opacity:0.82; margin-top:20px; max-width:560px;">Creadora y editora de video. Ayudo a marcas, empresas y profesionales de la salud a comunicar con contenido que se ve natural y conecta con su audiencia.</p>
+      <p style="font-size:17px; line-height:1.7; opacity:0.82; margin-top:16px; max-width:560px;">Desde la idea hasta el video final, me encargo de todo — guión, grabación y edición — para que tú solo tengas que publicar.</p>
+    </div>
+  </section>
+
+  <!-- CONOCEME MEJOR -->
+  <section id="conoceme" style="padding:clamp(56px,7vw,104px) clamp(20px,5vw,72px); background:var(--tint, oklch(0.965 0.018 45));">
+    <div style="max-width:680px;">
+      <div style="font-size:13px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent, oklch(0.63 0.13 35));">Conóceme mejor</div>
+      <h2 style="font-family:'Instrument Serif',serif; font-weight:400; font-size:clamp(32px,4.4vw,54px); line-height:1.05; letter-spacing:-0.4px; margin-top:14px;">Sígueme en mis redes</h2>
+      <p style="font-size:16px; line-height:1.6; opacity:0.72; margin-top:14px;">Aquí comparto mi día a día creando contenido — reels, behind the scenes y mi proceso. Échale un ojo a lo más reciente.</p>
+    </div>
+    <div class="conoce-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:42px; align-items:start;">
+      <!-- TikTok embed -->
+      <div style="background:#fff; border-radius:22px; padding:22px; border:1px solid rgba(33,29,24,0.06); box-shadow:0 18px 40px -28px rgba(33,29,24,0.3);">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+          <span style="font-weight:700; font-size:16px;">TikTok</span>
+          <a href="https://www.tiktok.com/@anadanyram_" target="_blank" style="font-size:13.5px; font-weight:600; color:var(--accent, oklch(0.63 0.13 35));">@anadanyram_ ↗</a>
+        </div>
+        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@anadanyram_" data-unique-id="anadanyram_" data-embed-type="creator" style="max-width:100%; min-width:288px; margin:0;">
+          <section><a target="_blank" href="https://www.tiktok.com/@anadanyram_">@anadanyram_</a></section>
+        </blockquote>
+      </div>
+      <!-- Instagram card -->
+      <div style="background:#fff; border-radius:22px; padding:22px; border:1px solid rgba(33,29,24,0.06); box-shadow:0 18px 40px -28px rgba(33,29,24,0.3); display:flex; flex-direction:column;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+          <span style="font-weight:700; font-size:16px;">Instagram</span>
+          <a href="https://www.instagram.com/anadanyram" target="_blank" style="font-size:13.5px; font-weight:600; color:var(--accent, oklch(0.63 0.13 35));">@anadanyram ↗</a>
+        </div>
+        <div style="flex:1;">
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/anadanyram/" data-instgrm-version="14" style="background:#fff; border:0; border-radius:14px; margin:0 auto; max-width:100%; width:100%;"></blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" style="padding:clamp(64px,8vw,120px) clamp(20px,5vw,72px); text-align:center;">
+    <div style="font-size:13px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent, oklch(0.63 0.13 35));">Contacto</div>
+    <h2 style="font-family:'Instrument Serif',serif; font-weight:400; font-size:clamp(36px,5.5vw,68px); line-height:1.03; letter-spacing:-0.5px; margin-top:14px;">Hagamos tu próximo video</h2>
+    <p style="font-size:17px; line-height:1.6; opacity:0.75; margin-top:18px; max-width:480px; margin-left:auto; margin-right:auto;">Cuéntame de tu marca o proyecto y armamos algo que se sienta tuyo.</p>
+    <div style="display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-top:38px;">
+      <a href="https://api.whatsapp.com/send/?phone=523316050763&amp;text&amp;type=phone_number&amp;app_absent=0" target="_blank" style="display:flex; align-items:center; gap:10px; background:var(--accent, oklch(0.63 0.13 35)); color:#fff; padding:15px 26px; border-radius:999px; font-weight:600; font-size:15.5px;" style-hover="filter:brightness(1.06); transform:translateY(-1px);"><span style="width:7px; height:7px; border-radius:50%; background:#fff;"></span>WhatsApp</a>
+      <a href="https://www.instagram.com/anadanyram" target="_blank" style="display:flex; align-items:center; gap:10px; padding:15px 26px; border-radius:999px; border:1px solid rgba(33,29,24,0.2); font-weight:600; font-size:15.5px;" style-hover="border-color:#211D18;">Instagram</a>
+      <a href="https://www.tiktok.com/@anadanyram_" target="_blank" style="display:flex; align-items:center; gap:10px; padding:15px 26px; border-radius:999px; border:1px solid rgba(33,29,24,0.2); font-weight:600; font-size:15.5px;" style-hover="border-color:#211D18;">TikTok</a>
+      <a href="mailto:anadanielaram@hotmail.com" style="display:flex; align-items:center; gap:10px; padding:15px 26px; border-radius:999px; border:1px solid rgba(33,29,24,0.2); font-weight:600; font-size:15.5px;" style-hover="border-color:#211D18;">Email</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="display:flex; flex-wrap:wrap; gap:16px; align-items:center; justify-content:space-between; padding:30px clamp(20px,5vw,72px); border-top:1px solid rgba(33,29,24,0.1); font-size:14px;">
+    <div style="display:flex; align-items:baseline; gap:9px;">
+      <span style="font-family:'Instrument Serif',serif; font-size:21px;">Ana Daniela</span>
+      <span style="opacity:0.5;">Creadora &amp; editora de video</span>
+    </div>
+    <div style="opacity:0.5;">© 2026 Ana Daniela Ramírez · Guadalajara, MX</div>
+  </footer>
+
+  <!-- FLOATING WHATSAPP -->
+  <sc-if value="{{ floatingWhatsapp }}" hint-placeholder-val="{{ true }}">
+    <a href="https://api.whatsapp.com/send/?phone=523316050763&amp;text&amp;type=phone_number&amp;app_absent=0" target="_blank" style="position:fixed; bottom:24px; right:24px; z-index:60; display:flex; align-items:center; gap:9px; background:var(--accent, oklch(0.63 0.13 35)); color:#fff; padding:14px 22px; border-radius:999px; font-weight:600; font-size:15px; box-shadow:0 16px 34px -14px rgba(33,29,24,0.5);" style-hover="transform:translateY(-2px);"><span style="width:8px; height:8px; border-radius:50%; background:#fff;"></span>Escríbeme</a>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: { &quot;width&quot;: 1280, &quot;height&quot;: 900 },
+  &quot;theme&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;Coral&quot;, &quot;Rosa&quot;, &quot;Oliva&quot;], &quot;default&quot;: &quot;Coral&quot;, &quot;tsType&quot;: &quot;string&quot; },
+  &quot;showPrices&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot; },
+  &quot;floatingWhatsapp&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot; }
+}">
+class Component extends DCLogic {
+  componentDidMount() {
+    setTimeout(() => {
+      if (window.tiktokEmbed && window.tiktokEmbed.lib && window.tiktokEmbed.lib.render) {
+        try { window.tiktokEmbed.lib.render(document.querySelectorAll('.tiktok-embed')); return; } catch (_) {}
+      }
+      const s = document.createElement('script');
+      s.src = 'https://www.tiktok.com/embed.js';
+      s.async = true;
+      document.body.appendChild(s);
+      // Instagram
+      if (window.instgrm && window.instgrm.Embeds) {
+        try { window.instgrm.Embeds.process(); } catch (_) {}
+      } else {
+        const ig = document.createElement('script');
+        ig.src = 'https://www.instagram.com/embed.js';
+        ig.async = true;
+        document.body.appendChild(ig);
+      }
+    }, 400);
+  }
+  renderVals() {
+    const theme = this.props.theme || 'Coral';
+    const themes = {
+      Coral: { a: 'oklch(0.63 0.13 35)', soft: 'oklch(0.90 0.045 40)', tint: 'oklch(0.965 0.018 45)' },
+      Rosa:  { a: 'oklch(0.62 0.13 8)',  soft: 'oklch(0.90 0.045 10)', tint: 'oklch(0.965 0.018 12)' },
+      Oliva: { a: 'oklch(0.56 0.085 130)', soft: 'oklch(0.90 0.045 125)', tint: 'oklch(0.965 0.016 125)' },
+    };
+    const t = themes[theme] || themes.Coral;
+    const rootStyle = {
+      '--accent': t.a, '--soft': t.soft, '--tint': t.tint,
+      background: '#F5F0E8', color: '#211D18',
+      fontFamily: "'Hanken Grotesk', sans-serif",
+      minHeight: '100vh', width: '100%', overflowX: 'hidden',
+    };
+    return {
+      rootStyle,
+      showPrices: this.props.showPrices !== false,
+      floatingWhatsapp: this.props.floatingWhatsapp !== false,
+      ugcVideos: [
+        { src: 'videos/v6.mp4', label: 'Bazar itinerante' },
+        { src: 'videos/v5.mp4', label: 'Reseña de producto' },
+        { src: 'videos/v2.mp4', label: 'Matcha' },
+        { src: 'videos/v8.mp4', label: 'Gym' },
+      ],
+      proVideos: [
+        { src: 'videos/v9.mp4', label: 'Doctor' },
+        { src: 'videos/v7.mp4', label: 'Doctora' },
+        { src: 'videos/v3.mp4', label: 'Edición para empresa' },
+        { src: 'videos/v4.mp4', label: 'Empresa · sin locución' },
+      ],
+      playVid: (e) => {
+        const cur = e.currentTarget.querySelector('video');
+        if (!cur) return;
+        document.querySelectorAll('video').forEach((o) => { if (o !== cur) { try { o.pause(); o.currentTime = 0; o.muted = true; } catch (_) {} } });
+        cur.muted = true;
+        const p = cur.play();
+        if (p && p.catch) p.catch(() => {});
+      },
+      pauseVid: (e) => { const v = e.currentTarget.querySelector('video'); if (!v) return; try { v.pause(); v.currentTime = 0; v.muted = true; } catch (_) {} },
+      toggleSound: (e) => {
+        const v = e.currentTarget.querySelector('video');
+        if (!v) return;
+        document.querySelectorAll('video').forEach((o) => { if (o !== v) o.muted = true; });
+        v.muted = !v.muted;
+        const p = v.play();
+        if (p && p.catch) p.catch(() => {});
+      },
+      brands: [
+        { src: 'logos/deargut.png', name: 'Dear Gut' },
+        { src: 'logos/soon.png', name: 'SOON Workout Studio' },
+        { src: 'logos/truesalads.png', name: 'True Salads' },
+        { src: 'logos/waterly.png', name: 'Waterly' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>
