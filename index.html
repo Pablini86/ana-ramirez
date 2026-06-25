@@ -72,7 +72,6 @@
       <a href="#portafolio" class="nav-page" style="opacity:0.78;" style-hover="opacity:1;">Portafolio</a>
       <a href="#tarifas" class="nav-page" style="opacity:0.78;" style-hover="opacity:1;">Tarifas</a>
       <a href="#sobre" class="nav-page" style="opacity:0.78;" style-hover="opacity:1;">Sobre mí</a>
-      <a href="#galeria" class="nav-page" style="opacity:0.78;" style-hover="opacity:1;">Galería</a>
       <a href="#conoceme" class="nav-page" style="opacity:0.78;" style-hover="opacity:1;">Conóceme</a>
       <a href="https://api.whatsapp.com/send/?phone=523316050763&amp;text&amp;type=phone_number&amp;app_absent=0" target="_blank" style="background:var(--accent, oklch(0.63 0.13 35)); color:#fff; padding:10px 18px; border-radius:999px; font-weight:600; font-size:14px;" style-hover="filter:brightness(1.06);">Hablemos</a>
     </nav>
@@ -183,7 +182,7 @@
       <span style="flex:1; height:1px; background:rgba(33,29,24,0.1);"></span>
     </div>
     <div class="grid-4" style="display:grid; grid-template-columns:repeat(4,1fr); gap:18px;">
-      <sc-for list="{{ marcaPersonalVideos }}" as="p" hint-placeholder-count="5">
+      <sc-for list="{{ marcaPersonalVideos }}" as="p" hint-placeholder-count="3">
         <div style="display:flex; flex-direction:column; gap:10px;">
           <div onMouseEnter="{{ playVid }}" onMouseLeave="{{ pauseVid }}" onClick="{{ toggleSound }}" style="position:relative; aspect-ratio:9/16; border-radius:18px; overflow:hidden; background:#000; border:1px solid rgba(33,29,24,0.06); box-shadow:0 14px 30px -18px rgba(33,29,24,0.35); cursor:pointer;">
             <video src="{{ p.src }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;"></video>
@@ -287,10 +286,14 @@
 
   <!-- SOBRE MI -->
   <section id="sobre" class="sobre-grid" style="display:grid; grid-template-columns:0.85fr 1.15fr; gap:clamp(28px,5vw,68px); align-items:center; padding:clamp(56px,7vw,104px) clamp(20px,5vw,72px); background:var(--tint, oklch(0.965 0.018 45));">
-    <div style="position:relative; justify-self:center;">
+    <div style="position:relative; justify-self:center; margin-bottom:34px;">
       <div style="position:absolute; inset:-14px; background:var(--soft, oklch(0.90 0.045 40)); border-radius:24px; transform:rotate(3deg);"></div>
       <div style="position:relative; width:min(340px,75vw); aspect-ratio:1/1; border-radius:20px; overflow:hidden; border:7px solid #fff; box-shadow:0 24px 50px -26px rgba(33,29,24,0.4);">
         <img src="ana.png" alt="Ana Ballesteros" style="width:100%; height:100%; object-fit:cover; object-position:50% 12%;">
+      </div>
+      <!-- foto extra -->
+      <div style="position:absolute; bottom:-28px; left:-32px; width:120px; aspect-ratio:4/5; border-radius:16px; overflow:hidden; border:6px solid #fff; box-shadow:0 18px 36px -16px rgba(33,29,24,0.4); transform:rotate(-7deg);">
+        <img src="{{ fotoExtra.src }}" alt="{{ fotoExtra.alt }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
       </div>
     </div>
     <div class="sobre-copy">
@@ -301,21 +304,6 @@
     </div>
   </section>
 
-  <!-- GALERIA -->
-  <section id="galeria" style="padding:clamp(56px,7vw,104px) clamp(20px,5vw,72px);">
-    <div style="max-width:680px;">
-      <div style="font-size:13px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent, oklch(0.63 0.13 35));">Galería</div>
-      <h2 style="font-family:'Instrument Serif',serif; font-weight:400; font-size:clamp(32px,4.4vw,54px); line-height:1.05; letter-spacing:-0.4px; margin-top:14px;">Un poco más de mí</h2>
-    </div>
-    <div class="grid-4" style="display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-top:42px;">
-      <sc-for list="{{ galeria }}" as="g" hint-placeholder-count="5">
-        <div style="position:relative; aspect-ratio:4/5; border-radius:18px; overflow:hidden; border:1px solid rgba(33,29,24,0.06); box-shadow:0 14px 30px -18px rgba(33,29,24,0.35);">
-          <img src="{{ g.src }}" alt="{{ g.alt }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
-        </div>
-      </sc-for>
-    </div>
-  </section>
-
   <!-- CONOCEME MEJOR -->
   <section id="conoceme" style="padding:clamp(56px,7vw,104px) clamp(20px,5vw,72px); background:var(--tint, oklch(0.965 0.018 45));">
     <div style="max-width:680px;">
@@ -323,7 +311,14 @@
       <h2 style="font-family:'Instrument Serif',serif; font-weight:400; font-size:clamp(32px,4.4vw,54px); line-height:1.05; letter-spacing:-0.4px; margin-top:14px;">Sígueme en mis redes</h2>
       <p style="font-size:16px; line-height:1.6; opacity:0.72; margin-top:14px;">Aquí comparto mi día a día creando contenido — reels, behind the scenes y mi proceso. Échale un ojo a lo más reciente.</p>
     </div>
-    <div class="conoce-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:42px; align-items:start;">
+    <div class="grid-4" style="display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:36px;">
+      <sc-for list="{{ momentos }}" as="m" hint-placeholder-count="4">
+        <div style="position:relative; aspect-ratio:4/5; border-radius:16px; overflow:hidden; border:1px solid rgba(33,29,24,0.06); box-shadow:0 12px 26px -16px rgba(33,29,24,0.3);">
+          <img src="{{ m.src }}" alt="{{ m.alt }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+        </div>
+      </sc-for>
+    </div>
+    <div class="conoce-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:34px; align-items:start;">
       <!-- TikTok embed -->
       <div style="background:#fff; border-radius:22px; padding:22px; border:1px solid rgba(33,29,24,0.06); box-shadow:0 18px 40px -28px rgba(33,29,24,0.3);">
         <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
@@ -378,7 +373,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{
   &quot;$preview&quot;: { &quot;width&quot;: 1280, &quot;height&quot;: 900 },
-  &quot;theme&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;Rosa pastel&quot;, &quot;Coral&quot;, &quot;Rosa&quot;, &quot;Oliva&quot;], &quot;default&quot;: &quot;Rosa pastel&quot;, &quot;tsType&quot;: &quot;string&quot; },
+  &quot;theme&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;Matcha&quot;, &quot;Coral&quot;, &quot;Rosa&quot;, &quot;Oliva&quot;], &quot;default&quot;: &quot;Matcha&quot;, &quot;tsType&quot;: &quot;string&quot; },
   &quot;showPrices&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot; },
   &quot;floatingWhatsapp&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot; }
 }">
@@ -404,14 +399,14 @@ class Component extends DCLogic {
     }, 400);
   }
   renderVals() {
-    const theme = this.props.theme || 'Rosa pastel';
+    const theme = this.props.theme || 'Matcha';
     const themes = {
-      'Rosa pastel': { a: '#ff295d', soft: '#ffc2d1', tint: '#fdf2f5' },
+      Matcha: { a: '#6F8F4E', soft: '#D6E3BD', tint: '#F5F3E7' },
       Coral: { a: 'oklch(0.63 0.13 35)', soft: 'oklch(0.90 0.045 40)', tint: 'oklch(0.965 0.018 45)' },
       Rosa:  { a: 'oklch(0.62 0.13 8)',  soft: 'oklch(0.90 0.045 10)', tint: 'oklch(0.965 0.018 12)' },
       Oliva: { a: 'oklch(0.56 0.085 130)', soft: 'oklch(0.90 0.045 125)', tint: 'oklch(0.965 0.016 125)' },
     };
-    const t = themes[theme] || themes['Rosa pastel'];
+    const t = themes[theme] || themes['Matcha'];
     const rootStyle = {
       '--accent': t.a, '--soft': t.soft, '--tint': t.tint,
       background: '#F5F0E8', color: '#211D18',
@@ -430,8 +425,6 @@ class Component extends DCLogic {
       marcaPersonalVideos: [
         { src: 'videos/mp-crea-caro.mp4', label: 'Crea Caro' },
         { src: 'videos/mp-mama-mariana.mp4', label: 'Mamá Mariana' },
-        { src: 'videos/mp-georgina-ballesteros.mp4', label: 'Georgina Ballesteros' },
-        { src: 'videos/mp-expo-ebio.mp4', label: 'Expo EBIO' },
         { src: 'videos/mp-academia-musical.mp4', label: 'Academia musical' },
       ],
       marcaVideos: [
@@ -439,8 +432,8 @@ class Component extends DCLogic {
         { src: 'videos/vm-heladeria.mp4', label: 'Heladería' },
         { src: 'videos/vm-marca.mp4', label: 'Video de marca' },
       ],
-      galeria: [
-        { src: 'fotos/foto-principal.jpg', alt: 'Ana Ballesteros' },
+      fotoExtra: { src: 'fotos/foto-principal.jpg', alt: 'Ana Ballesteros' },
+      momentos: [
         { src: 'fotos/galeria-1.jpg', alt: 'Ana Ballesteros' },
         { src: 'fotos/galeria-2.jpg', alt: 'Ana Ballesteros' },
         { src: 'fotos/galeria-3.jpg', alt: 'Ana Ballesteros' },
