@@ -378,7 +378,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{
   &quot;$preview&quot;: { &quot;width&quot;: 1280, &quot;height&quot;: 900 },
-  &quot;theme&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;Coral&quot;, &quot;Rosa&quot;, &quot;Oliva&quot;], &quot;default&quot;: &quot;Coral&quot;, &quot;tsType&quot;: &quot;string&quot; },
+  &quot;theme&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;Rosa pastel&quot;, &quot;Coral&quot;, &quot;Rosa&quot;, &quot;Oliva&quot;], &quot;default&quot;: &quot;Rosa pastel&quot;, &quot;tsType&quot;: &quot;string&quot; },
   &quot;showPrices&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot; },
   &quot;floatingWhatsapp&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot; }
 }">
@@ -404,13 +404,14 @@ class Component extends DCLogic {
     }, 400);
   }
   renderVals() {
-    const theme = this.props.theme || 'Coral';
+    const theme = this.props.theme || 'Rosa pastel';
     const themes = {
+      'Rosa pastel': { a: '#ff295d', soft: '#ffc2d1', tint: '#fdf2f5' },
       Coral: { a: 'oklch(0.63 0.13 35)', soft: 'oklch(0.90 0.045 40)', tint: 'oklch(0.965 0.018 45)' },
       Rosa:  { a: 'oklch(0.62 0.13 8)',  soft: 'oklch(0.90 0.045 10)', tint: 'oklch(0.965 0.018 12)' },
       Oliva: { a: 'oklch(0.56 0.085 130)', soft: 'oklch(0.90 0.045 125)', tint: 'oklch(0.965 0.016 125)' },
     };
-    const t = themes[theme] || themes.Coral;
+    const t = themes[theme] || themes['Rosa pastel'];
     const rootStyle = {
       '--accent': t.a, '--soft': t.soft, '--tint': t.tint,
       background: '#F5F0E8', color: '#211D18',
