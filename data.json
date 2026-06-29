@@ -31,7 +31,7 @@
         "id": "ugc-waterly",
         "src": "videos/ugc-waterly.mp4",
         "label": "Waterly",
-        "visible": false,
+        "visible": true,
         "order": 1,
         "poster": ""
       },
