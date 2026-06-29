@@ -47,7 +47,7 @@
         "id": "ugc-deargut",
         "src": "videos/ugc-deargut.mp4",
         "label": "Reseña Dear Gut",
-        "visible": false,
+        "visible": true,
         "order": 3,
         "poster": ""
       },
