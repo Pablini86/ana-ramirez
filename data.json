@@ -275,5 +275,15 @@
       "order": 8
     }
   ],
-  "pending": []
+  "pending": [
+    {
+      "id": "bbc3cc11-b352-45c1-a53e-53291e55395c",
+      "section": "ugc",
+      "label": "Edición ANA BALLLESTEROS (9)",
+      "filename": "Edición ANA BALLLESTEROS (9).mp4",
+      "driveFileId": "1PQ1D4KElzO9N3rEXgOVeB--VKYef1atK",
+      "status": "procesando",
+      "uploadedAt": "2026-06-29T23:56:44.373Z"
+    }
+  ]
 }
