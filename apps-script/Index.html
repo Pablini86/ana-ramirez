@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <meta charset="utf-8">
+  <style>
+    :root {
+      --bg: #F5F0E8;
+      --card: #FFFFFF;
+      --text: #211D18;
+      --accent: #6F8F4E;
+      --accent-light: #D6E3BD;
+      --muted: #8A8378;
+      --danger: #B3543E;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    header {
+      padding: 20px 24px;
+      background: var(--card);
+      border-bottom: 1px solid #E7E0D3;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    header h1 { margin: 0; font-size: 20px; }
+    header p { margin: 4px 0 0; font-size: 13px; color: var(--muted); }
+    main { max-width: 980px; margin: 0 auto; padding: 24px; }
+    .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+    .tab {
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: var(--card);
+      border: 1px solid #E7E0D3;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .panel { display: none; }
+    .panel.active { display: block; }
+    .section-title { font-size: 16px; margin: 0 0 4px; }
+    .section-sub { font-size: 13px; color: var(--muted); margin: 0 0 14px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #E7E0D3;
+      display: flex;
+      flex-direction: column;
+    }
+    .card.hidden-item { opacity: 0.45; }
+    .thumb { width: 100%; height: 130px; background: #ECE6D8; object-fit: cover; display: block; }
+    .card-body { padding: 10px 12px; display: flex; flex-direction: column; gap: 8px; }
+    .card-body input[type=text] {
+      border: 1px solid #E7E0D3;
+      border-radius: 6px;
+      padding: 6px 8px;
+      font-size: 13px;
+      width: 100%;
+    }
+    .row { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+    .btn-group { display: flex; gap: 4px; }
+    button.icon-btn {
+      border: 1px solid #E7E0D3;
+      background: #fff;
+      border-radius: 6px;
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    button.icon-btn:hover { background: var(--accent-light); }
+    .switch { position: relative; display: inline-block; width: 38px; height: 22px; flex-shrink: 0; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute; cursor: pointer; inset: 0;
+      background-color: #ccc; border-radius: 22px; transition: .2s;
+    }
+    .slider:before {
+      position: absolute; content: ""; height: 16px; width: 16px;
+      left: 3px; bottom: 3px; background-color: white; border-radius: 50%; transition: .2s;
+    }
+    input:checked + .slider { background-color: var(--accent); }
+    input:checked + .slider:before { transform: translateX(16px); }
+    .upload-btn {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 10px 16px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+      border: none;
+    }
+    .upload-btn:disabled { opacity: 0.5; cursor: default; }
+    .delete-btn { color: var(--danger); font-size: 12px; background: none; border: none; cursor: pointer; }
+    .pending-card { background: #FFF8E6; border: 1px solid #F0DDA0; border-radius: 10px; padding: 12px 14px; margin-bottom: 10px; }
+    .pending-card .row { margin-bottom: 4px; }
+    .badge { font-size: 11px; background: #F0DDA0; padding: 2px 8px; border-radius: 999px; }
+    .toast {
+      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+      background: var(--text); color: #fff; padding: 10px 18px; border-radius: 8px;
+      font-size: 13px; opacity: 0; transition: opacity .25s; pointer-events: none; z-index: 100;
+    }
+    .toast.show { opacity: 1; }
+    .progress-wrap { margin-top: 10px; font-size: 12px; color: var(--muted); }
+    .progress-bar { height: 6px; background: #E7E0D3; border-radius: 3px; overflow: hidden; margin-top: 4px; }
+    .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width .15s; }
+    .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+    .photo-card { background: var(--card); border-radius: 12px; border: 1px solid #E7E0D3; overflow: hidden; }
+    .photo-card img { width: 100%; height: 140px; object-fit: cover; display: block; background: #ECE6D8; }
+    .photo-card .card-body { padding: 10px 12px; }
+    .empty-msg { color: var(--muted); font-size: 13px; padding: 20px 0; }
+    .loading { text-align: center; padding: 60px 0; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Panel de Ana</h1>
+    <p>Edita tu portafolio, logos y fotos del sitio. Los cambios se publican solos en unos minutos.</p>
+  </header>
+
+  <main>
+    <div class="tabs" id="tabs"></div>
+    <div id="panels"></div>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const SECTIONS = [
+      { key: 'ugc', title: 'UGC y colaboraciones' },
+      { key: 'marcaPersonal', title: 'Marcas personales' },
+      { key: 'marcaVideos', title: 'Videos de marca' },
+    ];
+    const PHOTO_KEYS = [
+      { key: 'hero', title: 'Foto principal (portada)' },
+      { key: 'servicios', title: 'Servicios' },
+      { key: 'portafolio', title: 'Portafolio' },
+      { key: 'extra', title: 'Extra' },
+      { key: 'conoceme', title: 'Conóceme' },
+      { key: 'contacto', title: 'Contacto' },
+    ];
+    let DATA = null;
+    let BASE_URL = '';
+
+    function init() {
+      google.script.run.withSuccessHandler(onData).withFailureHandler(onError).getPanelData();
+    }
+
+    function onData(data) {
+      DATA = data;
+      BASE_URL = data.__siteBaseUrl || '';
+      renderTabs();
+      renderAll();
+    }
+
+    function onError(err) {
+      document.getElementById('panels').innerHTML =
+        '<p class="empty-msg">Ocurrió un error: ' + (err.message || err) + '</p>';
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2200);
+    }
+
+    function renderTabs() {
+      const tabsEl = document.getElementById('tabs');
+      const tabs = [...SECTIONS.map((s) => s.key), 'brands', 'fotos', 'pendientes'];
+      const titles = { brands: 'Marcas (logos)', fotos: 'Fotos del sitio', pendientes: 'Pendientes' };
+      tabsEl.innerHTML = tabs.map((k, i) =>
+        '<div class="tab' + (i === 0 ? ' active' : '') + '" data-tab="' + k + '">' +
+        (SECTIONS.find((s) => s.key === k) ? SECTIONS.find((s) => s.key === k).title : titles[k]) +
+        '</div>'
+      ).join('');
+      tabsEl.querySelectorAll('.tab').forEach((el) => {
+        el.addEventListener('click', () => {
+          tabsEl.querySelectorAll('.tab').forEach((t) => t.classList.remove('active'));
+          el.classList.add('active');
+          document.querySelectorAll('.panel').forEach((p) => p.classList.remove('active'));
+          document.getElementById('panel-' + el.dataset.tab).classList.add('active');
+        });
+      });
+    }
+
+    function renderAll() {
+      const panelsEl = document.getElementById('panels');
+      panelsEl.innerHTML =
+        SECTIONS.map((s, i) => videoPanelHtml(s, i === 0)).join('') +
+        brandsPanelHtml() +
+        photosPanelHtml() +
+        pendingPanelHtml();
+      SECTIONS.forEach((s) => attachVideoSectionEvents(s.key));
+      attachBrandEvents();
+      attachPhotoEvents();
+      attachPendingEvents();
+    }
+
+    function videoPanelHtml(section, active) {
+      const list = (DATA.portfolio[section.key] || []).slice().sort((a, b) => (a.order || 0) - (b.order || 0));
+      return '<div class="panel' + (active ? ' active' : '') + '" id="panel-' + section.key + '">' +
+        '<p class="section-title">' + section.title + '</p>' +
+        '<p class="section-sub">' + list.length + ' video(s)</p>' +
+        '<div class="grid">' + list.map((v) => videoCardHtml(section.key, v)).join('') + '</div>' +
+        (list.length === 0 ? '<p class="empty-msg">Todavía no hay videos aquí.</p>' : '') +
+        '<input type="file" accept="video/*" id="file-' + section.key + '" style="display:none">' +
+        '<button class="upload-btn" id="upload-btn-' + section.key + '">+ Subir video nuevo</button>' +
+        '<div class="progress-wrap" id="progress-' + section.key + '" style="display:none">' +
+        '  <span id="progress-label-' + section.key + '"></span>' +
+        '  <div class="progress-bar"><div class="progress-fill" id="progress-fill-' + section.key + '"></div></div>' +
+        '</div>' +
+      '</div>';
+    }
+
+    function videoCardHtml(sectionKey, v) {
+      const src = BASE_URL + v.src;
+      return '<div class="card' + (v.visible === false ? ' hidden-item' : '') + '" data-id="' + v.id + '">' +
+        '<video class="thumb" src="' + src + '" muted preload="metadata"></video>' +
+        '<div class="card-body">' +
+        '  <input type="text" value="' + escapeHtml(v.label) + '" data-action="label">' +
+        '  <div class="row">' +
+        '    <label class="switch"><input type="checkbox" data-action="visible" ' + (v.visible !== false ? 'checked' : '') + '><span class="slider"></span></label>' +
+        '    <div class="btn-group">' +
+        '      <button class="icon-btn" data-action="up">↑</button>' +
+        '      <button class="icon-btn" data-action="down">↓</button>' +
+        '    </div>' +
+        '    <button class="delete-btn" data-action="delete">Eliminar</button>' +
+        '  </div>' +
+        '</div></div>';
+    }
+
+    function attachVideoSectionEvents(sectionKey) {
+      const panel = document.getElementById('panel-' + sectionKey);
+      panel.querySelectorAll('.card').forEach((card) => {
+        const id = card.dataset.id;
+        card.querySelector('[data-action="label"]').addEventListener('change', (e) => {
+          call('updateLabel', [sectionKey, id, e.target.value], 'Etiqueta guardada');
+        });
+        card.querySelector('[data-action="visible"]').addEventListener('change', (e) => {
+          call('setVisibility', [sectionKey, id, e.target.checked], e.target.checked ? 'Video visible' : 'Video oculto');
+        });
+        card.querySelector('[data-action="up"]').addEventListener('click', () => call('moveItem', [sectionKey, id, -1], 'Movido'));
+        card.querySelector('[data-action="down"]').addEventListener('click', () => call('moveItem', [sectionKey, id, 1], 'Movido'));
+        card.querySelector('[data-action="delete"]').addEventListener('click', () => {
+          if (confirm('¿Eliminar este video del sitio?')) call('deleteItem', [sectionKey, id], 'Eliminado');
+        });
+      });
+      document.getElementById('upload-btn-' + sectionKey).addEventListener('click', () => {
+        document.getElementById('file-' + sectionKey).click();
+      });
+      document.getElementById('file-' + sectionKey).addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) handleVideoUpload(sectionKey, file);
+        e.target.value = '';
+      });
+    }
+
+    function call(fn, args, okMsg) {
+      google.script.run.withSuccessHandler((data) => {
+        onData(data);
+        if (okMsg) showToast(okMsg);
+      }).withFailureHandler(onError)[fn].apply(null, args);
+    }
+
+    /* ---------- Subida de video por fragmentos ---------- */
+    const CHUNK_SIZE = 1.5 * 1024 * 1024;
+
+    function handleVideoUpload(sectionKey, file) {
+      const label = file.name.replace(/\.[^.]+$/, '');
+      const btn = document.getElementById('upload-btn-' + sectionKey);
+      const wrap = document.getElementById('progress-' + sectionKey);
+      const fill = document.getElementById('progress-fill-' + sectionKey);
+      const lbl = document.getElementById('progress-label-' + sectionKey);
+      btn.disabled = true;
+      wrap.style.display = 'block';
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        const bytes = new Uint8Array(reader.result);
+        const totalChunks = Math.ceil(bytes.length / CHUNK_SIZE) || 1;
+
+        google.script.run.withSuccessHandler((uploadId) => {
+          sendChunk(uploadId, 0);
+        }).withFailureHandler((err) => { onError(err); resetUploadUi(); }).startVideoUpload(sectionKey, label, file.name);
+
+        function sendChunk(uploadId, index) {
+          if (index >= totalChunks) {
+            lbl.textContent = 'Finalizando...';
+            google.script.run.withSuccessHandler((data) => {
+              onData(data);
+              showToast('Video subido — se publicará cuando Pablo lo procese');
+              resetUploadUi();
+            }).withFailureHandler((err) => { onError(err); resetUploadUi(); })
+              .finalizeVideoUpload(uploadId, totalChunks, sectionKey, label, file.name);
+            return;
+          }
+          const start = index * CHUNK_SIZE;
+          const end = Math.min(start + CHUNK_SIZE, bytes.length);
+          const base64Chunk = bytesToBase64(bytes.slice(start, end));
+          lbl.textContent = 'Subiendo ' + (index + 1) + ' / ' + totalChunks;
+          fill.style.width = Math.round(((index + 1) / totalChunks) * 100) + '%';
+          google.script.run.withSuccessHandler(() => {
+            sendChunk(uploadId, index + 1);
+          }).withFailureHandler((err) => { onError(err); resetUploadUi(); }).uploadVideoChunk(uploadId, index, base64Chunk);
+        }
+      };
+      reader.readAsArrayBuffer(file);
+
+      function resetUploadUi() {
+        btn.disabled = false;
+        wrap.style.display = 'none';
+        fill.style.width = '0%';
+      }
+    }
+
+    function bytesToBase64(bytes) {
+      let binary = '';
+      for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+      return btoa(binary);
+    }
+
+    /* ---------- Marcas (logos) ---------- */
+    function brandsPanelHtml() {
+      const list = (DATA.brands || []).slice().sort((a, b) => (a.order || 0) - (b.order || 0));
+      return '<div class="panel" id="panel-brands">' +
+        '<p class="section-title">Marcas (logos — "Han confiado en mí")</p>' +
+        '<div class="grid">' + list.map((b) => brandCardHtml(b)).join('') + '</div>' +
+        (list.length === 0 ? '<p class="empty-msg">Todavía no hay logos.</p>' : '') +
+        '<input type="file" accept="image/*" id="file-brand" style="display:none">' +
+        '<button class="upload-btn" id="upload-btn-brand">+ Agregar logo</button>' +
+      '</div>';
+    }
+
+    function brandCardHtml(b) {
+      return '<div class="card' + (b.visible === false ? ' hidden-item' : '') + '" data-id="' + b.id + '">' +
+        '<img class="thumb" src="' + BASE_URL + b.src + '" style="object-fit:contain;background:#fff">' +
+        '<div class="card-body">' +
+        '  <input type="text" value="' + escapeHtml(b.name) + '" data-action="label">' +
+        '  <div class="row">' +
+        '    <label class="switch"><input type="checkbox" data-action="visible" ' + (b.visible !== false ? 'checked' : '') + '><span class="slider"></span></label>' +
+        '    <button class="delete-btn" data-action="delete">Eliminar</button>' +
+        '  </div>' +
+        '</div></div>';
+    }
+
+    function attachBrandEvents() {
+      const panel = document.getElementById('panel-brands');
+      panel.querySelectorAll('.card').forEach((card) => {
+        const id = card.dataset.id;
+        card.querySelector('[data-action="label"]').addEventListener('change', (e) => {
+          call('updateLabel', ['brands', id, e.target.value], 'Nombre guardado');
+        });
+        card.querySelector('[data-action="visible"]').addEventListener('change', (e) => {
+          call('setVisibility', ['brands', id, e.target.checked], e.target.checked ? 'Logo visible' : 'Logo oculto');
+        });
+        card.querySelector('[data-action="delete"]').addEventListener('click', () => {
+          if (confirm('¿Eliminar este logo?')) call('deleteItem', ['brands', id], 'Eliminado');
+        });
+      });
+      document.getElementById('upload-btn-brand').addEventListener('click', () => document.getElementById('file-brand').click());
+      document.getElementById('file-brand').addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const name = prompt('¿Nombre de la marca?', file.name.replace(/\.[^.]+$/, ''));
+        if (!name) { e.target.value = ''; return; }
+        fileToBase64(file).then(({ base64, ext }) => {
+          showToast('Subiendo logo...');
+          google.script.run.withSuccessHandler((data) => { onData(data); showToast('Logo agregado'); })
+            .withFailureHandler(onError).addBrandLogo(name, base64, ext);
+        });
+        e.target.value = '';
+      });
+    }
+
+    /* ---------- Fotos del sitio ---------- */
+    function photosPanelHtml() {
+      return '<div class="panel" id="panel-fotos">' +
+        '<p class="section-title">Fotos del sitio</p>' +
+        '<p class="section-sub">Cambia la foto que aparece en cada sección.</p>' +
+        '<div class="photo-grid">' + PHOTO_KEYS.map((p) => photoCardHtml(p)).join('') + '</div>' +
+      '</div>';
+    }
+
+    function photoCardHtml(p) {
+      const photo = DATA.sitePhotos[p.key] || {};
+      return '<div class="photo-card" data-key="' + p.key + '">' +
+        '<img src="' + BASE_URL + (photo.src || '') + '">' +
+        '<div class="card-body">' +
+        '  <p style="margin:0 0 8px;font-size:13px;font-weight:600">' + p.title + '</p>' +
+        '  <input type="file" accept="image/*" data-action="file" style="font-size:12px">' +
+        '</div></div>';
+    }
+
+    function attachPhotoEvents() {
+      document.querySelectorAll('#panel-fotos .photo-card').forEach((card) => {
+        const key = card.dataset.key;
+        card.querySelector('[data-action="file"]').addEventListener('change', (e) => {
+          const file = e.target.files[0];
+          if (!file) return;
+          fileToBase64(file).then(({ base64, ext }) => {
+            showToast('Subiendo foto...');
+            google.script.run.withSuccessHandler((data) => { onData(data); showToast('Foto actualizada'); })
+              .withFailureHandler(onError).uploadSitePhoto(key, base64, ext);
+          });
+        });
+      });
+    }
+
+    /* ---------- Pendientes ---------- */
+    function pendingPanelHtml() {
+      const list = DATA.pending || [];
+      return '<div class="panel" id="panel-pendientes">' +
+        '<p class="section-title">Videos pendientes de publicar</p>' +
+        '<p class="section-sub">Estos videos ya se subieron pero Pablo todavía no los procesa para publicarlos.</p>' +
+        (list.length === 0 ? '<p class="empty-msg">No hay videos pendientes.</p>' :
+          list.map((p) => pendingCardHtml(p)).join('')) +
+      '</div>';
+    }
+
+    function pendingCardHtml(p) {
+      const date = new Date(p.uploadedAt).toLocaleString('es-MX');
+      return '<div class="pending-card" data-id="' + p.id + '">' +
+        '<div class="row"><strong>' + escapeHtml(p.label) + '</strong><span class="badge">' + p.status + '</span></div>' +
+        '<div class="row"><span style="font-size:12px;color:var(--muted)">' + sectionTitle(p.section) + ' · subido ' + date + '</span>' +
+        '<button class="delete-btn" data-action="cancel">Cancelar</button></div>' +
+      '</div>';
+    }
+
+    function sectionTitle(key) {
+      const s = SECTIONS.find((x) => x.key === key);
+      return s ? s.title : key;
+    }
+
+    function attachPendingEvents() {
+      document.querySelectorAll('#panel-pendientes [data-action="cancel"]').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          const id = e.target.closest('.pending-card').dataset.id;
+          if (confirm('¿Cancelar y borrar este video pendiente?')) {
+            call('cancelPendingUpload', [id], 'Pendiente cancelado');
+          }
+        });
+      });
+    }
+
+    /* ---------- Utilidades ---------- */
+    function fileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const base64 = reader.result.split(',')[1];
+          const ext = (file.name.split('.').pop() || 'png').toLowerCase();
+          resolve({ base64, ext });
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function escapeHtml(s) {
+      return (s || '').toString()
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    document.getElementById('panels').innerHTML = '<div class="loading">Cargando...</div>';
+    init();
+  </script>
+</body>
+</html>
