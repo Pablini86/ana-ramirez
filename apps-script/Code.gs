@@ -11,6 +11,10 @@
  *   SITE_BASE_URL           ej. "https://anaballesteros.site/" (para previsualizar videos/fotos)
  */
 
+function normalizeBaseUrl_(url) {
+  return String(url || '').trim().replace(/\/+$/, '') + '/';
+}
+
 function getConfig_() {
   const p = PropertiesService.getScriptProperties();
   return {
@@ -19,7 +23,7 @@ function getConfig_() {
     repo: p.getProperty('GITHUB_REPO'),
     branch: p.getProperty('GITHUB_BRANCH') || 'main',
     pendingFolderId: p.getProperty('DRIVE_PENDING_FOLDER_ID'),
-    siteBaseUrl: p.getProperty('SITE_BASE_URL') || '',
+    siteBaseUrl: normalizeBaseUrl_(p.getProperty('SITE_BASE_URL') || 'https://anaballesteros.site/'),
     allowedEmails: (p.getProperty('ALLOWED_EMAILS') || '')
       .split(',').map((s) => s.trim().toLowerCase()).filter(Boolean),
   };
