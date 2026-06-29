@@ -111,7 +111,7 @@
     <div class="hero-photo" style="position:relative; justify-self:center;">
       <div style="position:absolute; inset:-16px; background:var(--soft, oklch(0.90 0.045 40)); border-radius:28px; transform:rotate(-3deg);"></div>
       <div class="hero-photo-img" style="position:relative; width:min(420px,80vw); aspect-ratio:4/5; border-radius:24px; overflow:hidden; border:8px solid #fff; box-shadow:0 30px 60px -28px rgba(33,29,24,0.4);">
-        <img src="fotos/galeria-2.jpg" alt="Ana Ballesteros" style="width:100%; height:100%; object-fit:cover; object-position:50% 18%;">
+        <img src="{{ fotoHero.src }}" alt="{{ fotoHero.alt }}" style="width:100%; height:100%; object-fit:cover; object-position:50% 18%;">
       </div>
       <!-- badge -->
       <div class="hero-badge" style="position:absolute; top:18px; left:-18px; background:#fff; padding:11px 16px; border-radius:14px; box-shadow:0 14px 30px -14px rgba(33,29,24,0.35); display:flex; align-items:center; gap:9px; font-weight:700; font-size:14px;">
@@ -183,7 +183,7 @@
       <sc-for list="{{ ugcVideos }}" as="v" hint-placeholder-count="3">
         <div style="display:flex; flex-direction:column; gap:10px;">
           <div onMouseEnter="{{ playVid }}" onMouseLeave="{{ pauseVid }}" onClick="{{ toggleSound }}" style="position:relative; aspect-ratio:9/16; border-radius:18px; overflow:hidden; background:#000; border:1px solid rgba(33,29,24,0.06); box-shadow:0 14px 30px -18px rgba(33,29,24,0.35); cursor:pointer;">
-            <video src="{{ v.src }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;"></video>
+            <video src="{{ v.src }}" poster="{{ v.poster }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;"></video>
             <div style="position:absolute; right:10px; bottom:10px; width:30px; height:30px; border-radius:50%; background:rgba(0,0,0,0.45); backdrop-filter:blur(4px); display:flex; align-items:center; justify-content:center; pointer-events:none;">
               <span style="width:0; height:0; border-top:5px solid transparent; border-bottom:5px solid transparent; border-left:8px solid #fff; margin-left:2px;"></span>
             </div>
@@ -204,7 +204,7 @@
       <sc-for list="{{ marcaPersonalVideos }}" as="p" hint-placeholder-count="3">
         <div style="display:flex; flex-direction:column; gap:10px;">
           <div onMouseEnter="{{ playVid }}" onMouseLeave="{{ pauseVid }}" onClick="{{ toggleSound }}" style="position:relative; aspect-ratio:9/16; border-radius:18px; overflow:hidden; background:#000; border:1px solid rgba(33,29,24,0.06); box-shadow:0 14px 30px -18px rgba(33,29,24,0.35); cursor:pointer;">
-            <video src="{{ p.src }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;"></video>
+            <video src="{{ p.src }}" poster="{{ p.poster }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;"></video>
             <div style="position:absolute; right:10px; bottom:10px; width:30px; height:30px; border-radius:50%; background:rgba(0,0,0,0.45); backdrop-filter:blur(4px); display:flex; align-items:center; justify-content:center; pointer-events:none;">
               <span style="width:0; height:0; border-top:5px solid transparent; border-bottom:5px solid transparent; border-left:8px solid #fff; margin-left:2px;"></span>
             </div>
@@ -225,7 +225,7 @@
       <sc-for list="{{ marcaVideos }}" as="m" hint-placeholder-count="3">
         <div style="display:flex; flex-direction:column; gap:10px;">
           <div onMouseEnter="{{ playVid }}" onMouseLeave="{{ pauseVid }}" onClick="{{ toggleSound }}" style="position:relative; aspect-ratio:9/16; border-radius:18px; overflow:hidden; background:#000; border:1px solid rgba(33,29,24,0.06); box-shadow:0 14px 30px -18px rgba(33,29,24,0.35); cursor:pointer;">
-            <video src="{{ m.src }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;"></video>
+            <video src="{{ m.src }}" poster="{{ m.poster }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;"></video>
             <div style="position:absolute; right:10px; bottom:10px; width:30px; height:30px; border-radius:50%; background:rgba(0,0,0,0.45); backdrop-filter:blur(4px); display:flex; align-items:center; justify-content:center; pointer-events:none;">
               <span style="width:0; height:0; border-top:5px solid transparent; border-bottom:5px solid transparent; border-left:8px solid #fff; margin-left:2px;"></span>
             </div>
@@ -400,8 +400,63 @@
   &quot;showPrices&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot; },
   &quot;floatingWhatsapp&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot; }
 }">
+const DEFAULT_SITE_DATA = {
+  sitePhotos: {
+    hero: { src: 'fotos/galeria-2.jpg', alt: 'Ana Ballesteros' },
+    servicios: { src: 'fotos/foto-principal.jpg', alt: 'Ana Ballesteros' },
+    portafolio: { src: 'fotos/galeria-1.jpg', alt: 'Ana Ballesteros' },
+    extra: { src: 'fotos/galeria-2.jpg', alt: 'Ana Ballesteros' },
+    conoceme: { src: 'fotos/galeria-3.jpg', alt: 'Ana Ballesteros' },
+    contacto: { src: 'fotos/galeria-4.jpg', alt: 'Ana Ballesteros' },
+  },
+  portfolio: {
+    ugc: [
+      { src: 'videos/ugc-waterly.mp4', label: 'Waterly' },
+      { src: 'videos/ugc-etam.mp4', label: 'Try-on Etam' },
+      { src: 'videos/ugc-deargut.mp4', label: 'Reseña Dear Gut' },
+      { src: 'videos/ugc-soon.mp4', label: 'SOON' },
+      { src: 'videos/ugc-educacion.mp4', label: 'Educación' },
+      { src: 'videos/ugc-unas.mp4', label: 'Uñas' },
+      { src: 'videos/ugc-crea.mp4', label: 'Crea' },
+      { src: 'videos/ugc-supersalads.mp4', label: 'Super Salads' },
+      { src: 'videos/ugc-bazar.mp4', label: 'Bazar' },
+      { src: 'videos/ugc-lomaira.mp4', label: 'Lomaira' },
+      { src: 'videos/ugc-casapalina.mp4', label: 'Casa Palina' },
+    ],
+    marcaPersonal: [
+      { src: 'videos/mp-crea-caro.mp4', label: 'Crea Caro' },
+      { src: 'videos/mp-mama-mariana.mp4', label: 'Mamá Mariana' },
+      { src: 'videos/mp-academia-musical.mp4', label: 'Academia musical' },
+      { src: 'videos/mp-eli.mp4', label: 'Eli' },
+      { src: 'videos/mp-dr-alexander.mp4', label: 'Dr. Alexander' },
+      { src: 'videos/mp-psicologa-infantil.mp4', label: 'Psicóloga infantil' },
+      { src: 'videos/mp-expo-ebio.mp4', label: 'Expo EBIO' },
+      { src: 'videos/mp-georgina-ballesteros.mp4', label: 'Georgina Ballesteros' },
+    ],
+    marcaVideos: [
+      { src: 'videos/vm-soon.mp4', label: 'SOON Workout Studio' },
+      { src: 'videos/vm-heladeria.mp4', label: 'Heladería' },
+      { src: 'videos/vm-marca.mp4', label: 'Video de marca' },
+      { src: 'videos/vm-help.mp4', label: 'VM Help' },
+    ],
+  },
+  brands: [
+    { src: 'logos/deargut.png', name: 'Dear Gut' },
+    { src: 'logos/soon.png', name: 'SOON Workout Studio' },
+    { src: 'logos/truesalads.png', name: 'True Salads' },
+    { src: 'logos/waterly.png', name: 'Waterly' },
+    { src: 'logos/etam.jpeg', name: 'Etam Paris' },
+    { src: 'logos/crea.png', name: 'Crea' },
+    { src: 'logos/lomaira.png', name: 'Lomaira' },
+    { src: 'logos/iexe.jpg', name: 'IEXE Escuela de Políticas Públicas' },
+  ],
+};
 class Component extends DCLogic {
   componentDidMount() {
+    fetch('data.json', { cache: 'no-store' })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => { if (data) this.setState({ siteData: data }); })
+      .catch(() => {});
     setTimeout(() => {
       if (window.tiktokEmbed && window.tiktokEmbed.lib && window.tiktokEmbed.lib.render) {
         try { window.tiktokEmbed.lib.render(document.querySelectorAll('.tiktok-embed')); return; } catch (_) {}
@@ -436,44 +491,24 @@ class Component extends DCLogic {
       fontFamily: "'Hanken Grotesk', sans-serif",
       minHeight: '100vh', width: '100%', overflowX: 'hidden',
     };
+    const data = this.state.siteData || DEFAULT_SITE_DATA;
+    const visibleSorted = (arr) => (arr || [])
+      .filter((v) => v.visible !== false)
+      .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+    const photo = (key) => (data.sitePhotos && data.sitePhotos[key]) || DEFAULT_SITE_DATA.sitePhotos[key];
     return {
       rootStyle,
       showPrices: this.props.showPrices !== false,
       floatingWhatsapp: this.props.floatingWhatsapp !== false,
-      ugcVideos: [
-        { src: 'videos/ugc-waterly.mp4', label: 'Waterly' },
-        { src: 'videos/ugc-etam.mp4', label: 'Try-on Etam' },
-        { src: 'videos/ugc-deargut.mp4', label: 'Reseña Dear Gut' },
-        { src: 'videos/ugc-soon.mp4', label: 'SOON' },
-        { src: 'videos/ugc-educacion.mp4', label: 'Educación' },
-        { src: 'videos/ugc-unas.mp4', label: 'Uñas' },
-        { src: 'videos/ugc-crea.mp4', label: 'Crea' },
-        { src: 'videos/ugc-supersalads.mp4', label: 'Super Salads' },
-        { src: 'videos/ugc-bazar.mp4', label: 'Bazar' },
-        { src: 'videos/ugc-lomaira.mp4', label: 'Lomaira' },
-        { src: 'videos/ugc-casapalina.mp4', label: 'Casa Palina' },
-      ],
-      marcaPersonalVideos: [
-        { src: 'videos/mp-crea-caro.mp4', label: 'Crea Caro' },
-        { src: 'videos/mp-mama-mariana.mp4', label: 'Mamá Mariana' },
-        { src: 'videos/mp-academia-musical.mp4', label: 'Academia musical' },
-        { src: 'videos/mp-eli.mp4', label: 'Eli' },
-        { src: 'videos/mp-dr-alexander.mp4', label: 'Dr. Alexander' },
-        { src: 'videos/mp-psicologa-infantil.mp4', label: 'Psicóloga infantil' },
-        { src: 'videos/mp-expo-ebio.mp4', label: 'Expo EBIO' },
-        { src: 'videos/mp-georgina-ballesteros.mp4', label: 'Georgina Ballesteros' },
-      ],
-      marcaVideos: [
-        { src: 'videos/vm-soon.mp4', label: 'SOON Workout Studio' },
-        { src: 'videos/vm-heladeria.mp4', label: 'Heladería' },
-        { src: 'videos/vm-marca.mp4', label: 'Video de marca' },
-        { src: 'videos/vm-help.mp4', label: 'VM Help' },
-      ],
-      fotoExtra: { src: 'fotos/galeria-2.jpg', alt: 'Ana Ballesteros' },
-      fotoServicios: { src: 'fotos/foto-principal.jpg', alt: 'Ana Ballesteros' },
-      fotoPortafolio: { src: 'fotos/galeria-1.jpg', alt: 'Ana Ballesteros' },
-      fotoConoceme: { src: 'fotos/galeria-3.jpg', alt: 'Ana Ballesteros' },
-      fotoContacto: { src: 'fotos/galeria-4.jpg', alt: 'Ana Ballesteros' },
+      ugcVideos: visibleSorted((data.portfolio || {}).ugc || DEFAULT_SITE_DATA.portfolio.ugc),
+      marcaPersonalVideos: visibleSorted((data.portfolio || {}).marcaPersonal || DEFAULT_SITE_DATA.portfolio.marcaPersonal),
+      marcaVideos: visibleSorted((data.portfolio || {}).marcaVideos || DEFAULT_SITE_DATA.portfolio.marcaVideos),
+      fotoHero: photo('hero'),
+      fotoExtra: photo('extra'),
+      fotoServicios: photo('servicios'),
+      fotoPortafolio: photo('portafolio'),
+      fotoConoceme: photo('conoceme'),
+      fotoContacto: photo('contacto'),
       playVid: (e) => {
         const cur = e.currentTarget.querySelector('video');
         if (!cur) return;
@@ -491,16 +526,7 @@ class Component extends DCLogic {
         const p = v.play();
         if (p && p.catch) p.catch(() => {});
       },
-      brands: [
-        { src: 'logos/deargut.png', name: 'Dear Gut' },
-        { src: 'logos/soon.png', name: 'SOON Workout Studio' },
-        { src: 'logos/truesalads.png', name: 'True Salads' },
-        { src: 'logos/waterly.png', name: 'Waterly' },
-        { src: 'logos/etam.jpeg', name: 'Etam Paris' },
-        { src: 'logos/crea.png', name: 'Crea' },
-        { src: 'logos/lomaira.png', name: 'Lomaira' },
-        { src: 'logos/iexe.jpg', name: 'IEXE Escuela de Políticas Públicas' },
-      ],
+      brands: visibleSorted(data.brands || DEFAULT_SITE_DATA.brands),
     };
   }
 }
