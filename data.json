@@ -39,7 +39,7 @@
         "id": "ugc-etam",
         "src": "videos/ugc-etam.mp4",
         "label": "Try-on Etam",
-        "visible": true,
+        "visible": false,
         "order": 2,
         "poster": ""
       },
