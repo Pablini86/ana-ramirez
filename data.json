@@ -1,52 +1,279 @@
 {
   "sitePhotos": {
-    "hero": { "src": "fotos/galeria-2.jpg", "alt": "Ana Ballesteros" },
-    "servicios": { "src": "fotos/foto-principal.jpg", "alt": "Ana Ballesteros" },
-    "portafolio": { "src": "fotos/galeria-1.jpg", "alt": "Ana Ballesteros" },
-    "extra": { "src": "fotos/galeria-2.jpg", "alt": "Ana Ballesteros" },
-    "conoceme": { "src": "fotos/galeria-3.jpg", "alt": "Ana Ballesteros" },
-    "contacto": { "src": "fotos/galeria-4.jpg", "alt": "Ana Ballesteros" }
+    "hero": {
+      "src": "fotos/galeria-2.jpg",
+      "alt": "Ana Ballesteros"
+    },
+    "servicios": {
+      "src": "fotos/foto-principal.jpg",
+      "alt": "Ana Ballesteros"
+    },
+    "portafolio": {
+      "src": "fotos/galeria-1.jpg",
+      "alt": "Ana Ballesteros"
+    },
+    "extra": {
+      "src": "fotos/galeria-2.jpg",
+      "alt": "Ana Ballesteros"
+    },
+    "conoceme": {
+      "src": "fotos/galeria-3.jpg",
+      "alt": "Ana Ballesteros"
+    },
+    "contacto": {
+      "src": "fotos/galeria-4.jpg",
+      "alt": "Ana Ballesteros"
+    }
   },
   "portfolio": {
     "ugc": [
-      { "id": "ugc-waterly", "src": "videos/ugc-waterly.mp4", "label": "Waterly", "visible": true, "order": 1, "poster": "" },
-      { "id": "ugc-etam", "src": "videos/ugc-etam.mp4", "label": "Try-on Etam", "visible": true, "order": 2, "poster": "" },
-      { "id": "ugc-deargut", "src": "videos/ugc-deargut.mp4", "label": "Reseña Dear Gut", "visible": true, "order": 3, "poster": "" },
-      { "id": "ugc-soon", "src": "videos/ugc-soon.mp4", "label": "SOON", "visible": true, "order": 4, "poster": "" },
-      { "id": "ugc-educacion", "src": "videos/ugc-educacion.mp4", "label": "Educación", "visible": true, "order": 5, "poster": "" },
-      { "id": "ugc-unas", "src": "videos/ugc-unas.mp4", "label": "Uñas", "visible": true, "order": 6, "poster": "" },
-      { "id": "ugc-crea", "src": "videos/ugc-crea.mp4", "label": "Crea", "visible": true, "order": 7, "poster": "" },
-      { "id": "ugc-supersalads", "src": "videos/ugc-supersalads.mp4", "label": "Super Salads", "visible": true, "order": 8, "poster": "" },
-      { "id": "ugc-bazar", "src": "videos/ugc-bazar.mp4", "label": "Bazar", "visible": true, "order": 9, "poster": "" },
-      { "id": "ugc-lomaira", "src": "videos/ugc-lomaira.mp4", "label": "Lomaira", "visible": true, "order": 10, "poster": "" },
-      { "id": "ugc-casapalina", "src": "videos/ugc-casapalina.mp4", "label": "Casa Palina", "visible": true, "order": 11, "poster": "" }
+      {
+        "id": "ugc-waterly",
+        "src": "videos/ugc-waterly.mp4",
+        "label": "Waterly",
+        "visible": true,
+        "order": 1,
+        "poster": ""
+      },
+      {
+        "id": "ugc-etam",
+        "src": "videos/ugc-etam.mp4",
+        "label": "Try-on Etam",
+        "visible": true,
+        "order": 2,
+        "poster": ""
+      },
+      {
+        "id": "ugc-deargut",
+        "src": "videos/ugc-deargut.mp4",
+        "label": "Reseña Dear Gut",
+        "visible": true,
+        "order": 3,
+        "poster": ""
+      },
+      {
+        "id": "ugc-soon",
+        "src": "videos/ugc-soon.mp4",
+        "label": "SOON",
+        "visible": true,
+        "order": 4,
+        "poster": ""
+      },
+      {
+        "id": "ugc-educacion",
+        "src": "videos/ugc-educacion.mp4",
+        "label": "Educación",
+        "visible": true,
+        "order": 5,
+        "poster": ""
+      },
+      {
+        "id": "ugc-unas",
+        "src": "videos/ugc-unas.mp4",
+        "label": "Uñas",
+        "visible": true,
+        "order": 6,
+        "poster": ""
+      },
+      {
+        "id": "ugc-crea",
+        "src": "videos/ugc-crea.mp4",
+        "label": "Crea",
+        "visible": true,
+        "order": 7,
+        "poster": ""
+      },
+      {
+        "id": "ugc-supersalads",
+        "src": "videos/ugc-supersalads.mp4",
+        "label": "Super Salads",
+        "visible": true,
+        "order": 8,
+        "poster": ""
+      },
+      {
+        "id": "ugc-bazar",
+        "src": "videos/ugc-bazar.mp4",
+        "label": "Bazar",
+        "visible": true,
+        "order": 9,
+        "poster": ""
+      },
+      {
+        "id": "ugc-lomaira",
+        "src": "videos/ugc-lomaira.mp4",
+        "label": "Lomaira",
+        "visible": true,
+        "order": 10,
+        "poster": ""
+      },
+      {
+        "id": "ugc-casapalina",
+        "src": "videos/ugc-casapalina.mp4",
+        "label": "Casa Palina",
+        "visible": true,
+        "order": 11,
+        "poster": ""
+      }
     ],
     "marcaPersonal": [
-      { "id": "mp-crea-caro", "src": "videos/mp-crea-caro.mp4", "label": "Crea Caro", "visible": true, "order": 1, "poster": "" },
-      { "id": "mp-mama-mariana", "src": "videos/mp-mama-mariana.mp4", "label": "Mamá Mariana", "visible": true, "order": 2, "poster": "" },
-      { "id": "mp-academia-musical", "src": "videos/mp-academia-musical.mp4", "label": "Academia musical", "visible": true, "order": 3, "poster": "" },
-      { "id": "mp-eli", "src": "videos/mp-eli.mp4", "label": "Eli", "visible": true, "order": 4, "poster": "" },
-      { "id": "mp-dr-alexander", "src": "videos/mp-dr-alexander.mp4", "label": "Dr. Alexander", "visible": true, "order": 5, "poster": "" },
-      { "id": "mp-psicologa-infantil", "src": "videos/mp-psicologa-infantil.mp4", "label": "Psicóloga infantil", "visible": true, "order": 6, "poster": "" },
-      { "id": "mp-expo-ebio", "src": "videos/mp-expo-ebio.mp4", "label": "Expo EBIO", "visible": true, "order": 7, "poster": "" },
-      { "id": "mp-georgina-ballesteros", "src": "videos/mp-georgina-ballesteros.mp4", "label": "Georgina Ballesteros", "visible": true, "order": 8, "poster": "" }
+      {
+        "id": "mp-crea-caro",
+        "src": "videos/mp-crea-caro.mp4",
+        "label": "Crea Caro",
+        "visible": true,
+        "order": 2,
+        "poster": ""
+      },
+      {
+        "id": "mp-mama-mariana",
+        "src": "videos/mp-mama-mariana.mp4",
+        "label": "Mamá Mariana",
+        "visible": true,
+        "order": 1,
+        "poster": ""
+      },
+      {
+        "id": "mp-academia-musical",
+        "src": "videos/mp-academia-musical.mp4",
+        "label": "Academia musical",
+        "visible": true,
+        "order": 3,
+        "poster": ""
+      },
+      {
+        "id": "mp-eli",
+        "src": "videos/mp-eli.mp4",
+        "label": "Eli",
+        "visible": true,
+        "order": 4,
+        "poster": ""
+      },
+      {
+        "id": "mp-dr-alexander",
+        "src": "videos/mp-dr-alexander.mp4",
+        "label": "Dr. Alexander",
+        "visible": true,
+        "order": 5,
+        "poster": ""
+      },
+      {
+        "id": "mp-psicologa-infantil",
+        "src": "videos/mp-psicologa-infantil.mp4",
+        "label": "Psicóloga infantil",
+        "visible": true,
+        "order": 6,
+        "poster": ""
+      },
+      {
+        "id": "mp-expo-ebio",
+        "src": "videos/mp-expo-ebio.mp4",
+        "label": "Expo EBIO",
+        "visible": true,
+        "order": 7,
+        "poster": ""
+      },
+      {
+        "id": "mp-georgina-ballesteros",
+        "src": "videos/mp-georgina-ballesteros.mp4",
+        "label": "Georgina Ballesteros",
+        "visible": true,
+        "order": 8,
+        "poster": ""
+      }
     ],
     "marcaVideos": [
-      { "id": "vm-soon", "src": "videos/vm-soon.mp4", "label": "SOON Workout Studio", "visible": true, "order": 1, "poster": "" },
-      { "id": "vm-heladeria", "src": "videos/vm-heladeria.mp4", "label": "Heladería", "visible": true, "order": 2, "poster": "" },
-      { "id": "vm-marca", "src": "videos/vm-marca.mp4", "label": "Video de marca", "visible": true, "order": 3, "poster": "" },
-      { "id": "vm-help", "src": "videos/vm-help.mp4", "label": "VM Help", "visible": true, "order": 4, "poster": "" }
+      {
+        "id": "vm-soon",
+        "src": "videos/vm-soon.mp4",
+        "label": "SOON Workout Studio",
+        "visible": true,
+        "order": 1,
+        "poster": ""
+      },
+      {
+        "id": "vm-heladeria",
+        "src": "videos/vm-heladeria.mp4",
+        "label": "Heladería",
+        "visible": true,
+        "order": 2,
+        "poster": ""
+      },
+      {
+        "id": "vm-marca",
+        "src": "videos/vm-marca.mp4",
+        "label": "Video de marca",
+        "visible": true,
+        "order": 3,
+        "poster": ""
+      },
+      {
+        "id": "vm-help",
+        "src": "videos/vm-help.mp4",
+        "label": "VM Help",
+        "visible": true,
+        "order": 4,
+        "poster": ""
+      }
     ]
   },
   "brands": [
-    { "id": "deargut", "src": "logos/deargut.png", "name": "Dear Gut", "visible": true, "order": 1 },
-    { "id": "soon", "src": "logos/soon.png", "name": "SOON Workout Studio", "visible": true, "order": 2 },
-    { "id": "truesalads", "src": "logos/truesalads.png", "name": "True Salads", "visible": true, "order": 3 },
-    { "id": "waterly", "src": "logos/waterly.png", "name": "Waterly", "visible": true, "order": 4 },
-    { "id": "etam", "src": "logos/etam.jpeg", "name": "Etam Paris", "visible": true, "order": 5 },
-    { "id": "crea", "src": "logos/crea.png", "name": "Crea", "visible": true, "order": 6 },
-    { "id": "lomaira", "src": "logos/lomaira.png", "name": "Lomaira", "visible": true, "order": 7 },
-    { "id": "iexe", "src": "logos/iexe.jpg", "name": "IEXE Escuela de Políticas Públicas", "visible": true, "order": 8 }
+    {
+      "id": "deargut",
+      "src": "logos/deargut.png",
+      "name": "Dear Gut",
+      "visible": true,
+      "order": 1
+    },
+    {
+      "id": "soon",
+      "src": "logos/soon.png",
+      "name": "SOON Workout Studio",
+      "visible": true,
+      "order": 2
+    },
+    {
+      "id": "truesalads",
+      "src": "logos/truesalads.png",
+      "name": "True Salads",
+      "visible": true,
+      "order": 3
+    },
+    {
+      "id": "waterly",
+      "src": "logos/waterly.png",
+      "name": "Waterly",
+      "visible": true,
+      "order": 4
+    },
+    {
+      "id": "etam",
+      "src": "logos/etam.jpeg",
+      "name": "Etam Paris",
+      "visible": true,
+      "order": 5
+    },
+    {
+      "id": "crea",
+      "src": "logos/crea.png",
+      "name": "Crea",
+      "visible": true,
+      "order": 6
+    },
+    {
+      "id": "lomaira",
+      "src": "logos/lomaira.png",
+      "name": "Lomaira",
+      "visible": true,
+      "order": 7
+    },
+    {
+      "id": "iexe",
+      "src": "logos/iexe.jpg",
+      "name": "IEXE Escuela de Políticas Públicas",
+      "visible": true,
+      "order": 8
+    }
   ],
   "pending": []
 }
