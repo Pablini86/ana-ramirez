@@ -6,8 +6,8 @@ Esta carpeta (`apps-script/`) contiene el backend del panel admin. No se publica
 
 1. Ve a https://github.com/settings/personal-access-tokens/new (token "fine-grained").
 2. Repository access → **Only select repositories** → `ana-ramirez`.
-3. Permissions → Repository permissions → **Contents: Read and write**. Nada más.
-4. Genera el token y cópialo (solo se muestra una vez). Guárdalo en un lugar seguro temporalmente.
+3. Permissions → Repository permissions → **Contents: Read and write** y **Actions: Read and write**. Nada más.
+4. Genera el token y cópialo (solo se muestra una vez). Guárdalo en un lugar seguro temporalmente. Vas a usar este mismo token dos veces (pasos 3 y 6).
 
 ## 2. Crear el proyecto de Apps Script
 
@@ -39,7 +39,16 @@ El token nunca debe pegarse en el código ni compartirse en chat — solo va aqu
 2. Ábrela y copia el ID de la URL: `https://drive.google.com/drive/folders/`**`ESTE_ID`**.
 3. Pega ese ID en la propiedad `DRIVE_PENDING_FOLDER_ID` del paso 3.
 
-## 5. Publicar como aplicación web
+## 5. Secret de GitHub para publicar videos automáticamente
+
+1. En GitHub, entra al repo `ana-ramirez` → **Settings** → **Secrets and variables** → **Actions**.
+2. **New repository secret**.
+3. Nombre: `PUBLISH_TOKEN`. Valor: el mismo token del paso 1.
+4. Guardar.
+
+Esto permite que el botón "Publicar" del panel comprima y suba el video automáticamente (vía GitHub Actions), sin que tengas que pedírmelo en el chat.
+
+## 6. Publicar como aplicación web
 
 1. En el editor: **Implementar** → **Nueva implementación**.
 2. Tipo: **Aplicación web**.
@@ -53,7 +62,7 @@ El token nunca debe pegarse en el código ni compartirse en chat — solo va aqu
 
 - **Mostrar/ocultar, reordenar, cambiar etiquetas, logos, fotos del sitio**: se guardan al instante directo en el repo de GitHub. El sitio se actualiza solo en ~1 minuto (GitHub Pages se reconstruye automáticamente).
 - **Subir un video nuevo**: Ana lo sube desde el panel (sin comprimir, tal cual lo grabó). Se guarda en la carpeta de Drive del paso 4 y aparece en la pestaña "Pendientes" del panel con estatus "procesando". El video **no aparece en el sitio todavía**.
-- **Publicar un video pendiente**: esto lo haces tú, solo cuando tú lo pidas. Cuando quieras publicar uno, dime y lo comprimo, lo subo a `videos/` y lo agrego a la sección correspondiente — usando el archivo que está en la carpeta de Drive.
+- **Publicar un video pendiente**: tú decides cuándo, dando clic en "Publicar" dentro de la pestaña "Pendientes" del panel — no necesitas pedírmelo en el chat. Eso dispara un GitHub Action que descarga el video de Drive, lo comprime y lo agrega a la sección correspondiente automáticamente (tarda 1-3 minutos). Puedes ver el progreso en la pestaña **Actions** del repo en GitHub.
 - Si una subida de video falla a medio camino (conexión inestable), Ana puede simplemente intentar de nuevo.
 - Videos crudos muy pesados (varios cientos de MB) pueden tardar varios minutos en subir o fallar por el navegador del celular — si pasa, pídele que intente desde wifi o que lo recorte un poco.
 

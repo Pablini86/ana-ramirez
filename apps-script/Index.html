@@ -123,8 +123,13 @@
 </head>
 <body>
   <header>
-    <h1>Panel de Ana</h1>
-    <p>Edita tu portafolio, logos y fotos del sitio. Los cambios se publican solos en unos minutos.</p>
+    <div class="row" style="align-items:flex-start">
+      <div>
+        <h1>Panel de Ana</h1>
+        <p>Edita tu portafolio, logos y fotos del sitio. Los cambios se publican solos en unos minutos.</p>
+      </div>
+      <button class="icon-btn" id="refresh-btn" title="Actualizar">⟳</button>
+    </div>
   </header>
 
   <main>
@@ -429,10 +434,16 @@
 
     function pendingCardHtml(p) {
       const date = new Date(p.uploadedAt).toLocaleString('es-MX');
+      const publishing = p.status === 'publicando';
       return '<div class="pending-card" data-id="' + p.id + '">' +
         '<div class="row"><strong>' + escapeHtml(p.label) + '</strong><span class="badge">' + p.status + '</span></div>' +
         '<div class="row"><span style="font-size:12px;color:var(--muted)">' + sectionTitle(p.section) + ' · subido ' + date + '</span>' +
-        '<button class="delete-btn" data-action="cancel">Cancelar</button></div>' +
+        '<div class="btn-group">' +
+        (publishing
+          ? '<span style="font-size:12px;color:var(--muted)">Publicando, puede tardar unos minutos...</span>'
+          : '<button class="upload-btn" style="padding:6px 12px;margin:0" data-action="publish">Publicar</button>' +
+            '<button class="delete-btn" data-action="cancel">Cancelar</button>') +
+        '</div></div>' +
       '</div>';
     }
 
@@ -448,6 +459,14 @@
           if (confirm('¿Cancelar y borrar este video pendiente?')) {
             call('cancelPendingUpload', [id], 'Pendiente cancelado');
           }
+        });
+      });
+      document.querySelectorAll('#panel-pendientes [data-action="publish"]').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          const id = e.target.closest('.pending-card').dataset.id;
+          btn.disabled = true;
+          btn.textContent = 'Publicando...';
+          call('publishPendingVideo', [id], 'Publicando — tarda unos minutos, luego actualiza la página');
         });
       });
     }
@@ -470,6 +489,11 @@
       return (s || '').toString()
         .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     }
+
+    document.getElementById('refresh-btn').addEventListener('click', () => {
+      document.getElementById('panels').innerHTML = '<div class="loading">Cargando...</div>';
+      init();
+    });
 
     document.getElementById('panels').innerHTML = '<div class="loading">Cargando...</div>';
     init();

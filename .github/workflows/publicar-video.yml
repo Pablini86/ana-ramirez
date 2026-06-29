@@ -1,0 +1,52 @@
+name: Publicar video pendiente
+
+on:
+  workflow_dispatch:
+    inputs:
+      upload_id:
+        description: ID del pendiente en data.json
+        required: true
+      section:
+        description: ugc | marcaPersonal | marcaVideos
+        required: true
+      label:
+        description: Etiqueta del video
+        required: true
+      filename:
+        description: Nombre original del archivo subido
+        required: true
+      drive_file_id:
+        description: ID del archivo en Google Drive
+        required: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PUBLISH_TOKEN }}
+
+      - name: Instalar gdown
+        run: pip install --quiet gdown
+
+      - name: Descargar video crudo de Drive
+        run: gdown "${{ github.event.inputs.drive_file_id }}" -O raw_input
+
+      - name: Comprimir y actualizar data.json
+        run: |
+          python3 scripts/publish_pending_video.py \
+            --upload-id "${{ github.event.inputs.upload_id }}" \
+            --section "${{ github.event.inputs.section }}" \
+            --label "${{ github.event.inputs.label }}" \
+            --filename "${{ github.event.inputs.filename }}" \
+            --input-file raw_input
+
+      - name: Commit y push
+        run: |
+          git config user.name "panel-ana-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add videos/ data.json
+          git commit -m "Publicar video pendiente: ${{ github.event.inputs.label }}" || echo "Nada que commitear"
+          git push

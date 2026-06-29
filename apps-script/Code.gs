@@ -77,6 +77,18 @@ function ghFileShaIfExists_(cfg, path) {
   try { return ghGetFile_(cfg, path).sha; } catch (e) { return null; }
 }
 
+function ghDispatchWorkflow_(cfg, workflowFile, ref, inputs) {
+  const url = 'https://api.github.com/repos/' + cfg.owner + '/' + cfg.repo + '/actions/workflows/' + workflowFile + '/dispatches';
+  const res = UrlFetchApp.fetch(url, {
+    method: 'post',
+    contentType: 'application/json',
+    headers: ghHeaders_(cfg),
+    payload: JSON.stringify({ ref: ref, inputs: inputs }),
+    muteHttpExceptions: true,
+  });
+  if (res.getResponseCode() >= 300) throw new Error('No se pudo iniciar la publicación: ' + res.getContentText());
+}
+
 function ghPutFile_(cfg, path, base64Content, sha, message) {
   const url = 'https://api.github.com/repos/' + cfg.owner + '/' + cfg.repo + '/contents/' + path;
   const payload = { message: message, content: base64Content, branch: cfg.branch };
@@ -257,6 +269,35 @@ function guessMime_(filename) {
   if (ext === 'mov') return 'video/quicktime';
   if (ext === 'mp4') return 'video/mp4';
   return 'application/octet-stream';
+}
+
+function publishPendingVideo(uploadId) {
+  checkAccess_();
+  const cfg = getConfig_();
+  const { data, sha } = readSiteData_(cfg);
+  const item = (data.pending || []).find((x) => x.id === uploadId);
+  if (!item) throw new Error('No se encontró ese video pendiente.');
+  if (item.status === 'publicando') throw new Error('Ese video ya se está publicando.');
+
+  try {
+    DriveApp.getFileById(item.driveFileId).setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+  } catch (e) {
+    throw new Error('No se pudo preparar el archivo en Drive: ' + e.message);
+  }
+
+  item.status = 'publicando';
+  writeSiteData_(cfg, data, sha, 'Panel: publicando ' + item.label);
+
+  ghDispatchWorkflow_(cfg, 'publicar-video.yml', cfg.branch, {
+    upload_id: item.id,
+    section: item.section,
+    label: item.label,
+    filename: item.filename,
+    drive_file_id: item.driveFileId,
+  });
+
+  data.__siteBaseUrl = cfg.siteBaseUrl;
+  return data;
 }
 
 function cancelPendingUpload(uploadId) {
