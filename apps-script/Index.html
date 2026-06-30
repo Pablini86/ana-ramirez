@@ -441,7 +441,8 @@
         '<div class="row"><span style="font-size:12px;color:var(--muted)">' + sectionTitle(p.section) + ' · subido ' + date + '</span>' +
         '<div class="btn-group">' +
         (publishing
-          ? '<span style="font-size:12px;color:var(--muted)">Publicando, puede tardar unos minutos...</span>'
+          ? '<span style="font-size:12px;color:var(--muted)">Publicando, puede tardar unos minutos...</span>' +
+            '<button class="delete-btn" data-action="retry">Reintentar</button>'
           : '<button class="upload-btn" style="padding:6px 12px;margin:0" data-action="publish">Publicar</button>' +
             '<button class="delete-btn" data-action="cancel">Cancelar</button>') +
         '</div></div>' +
@@ -468,6 +469,12 @@
           btn.disabled = true;
           btn.textContent = 'Publicando...';
           call('publishPendingVideo', [id], 'Publicando — tarda unos minutos, luego actualiza la página');
+        });
+      });
+      document.querySelectorAll('#panel-pendientes [data-action="retry"]').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          const id = e.target.closest('.pending-card').dataset.id;
+          call('resetPendingStatus', [id], 'Puedes intentar publicar de nuevo');
         });
       });
     }

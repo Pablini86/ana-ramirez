@@ -307,6 +307,17 @@ function publishPendingVideo(uploadId) {
   return data;
 }
 
+function resetPendingStatus(uploadId) {
+  checkAccess_();
+  const cfg = getConfig_();
+  const { data, sha } = readSiteData_(cfg);
+  const item = (data.pending || []).find((x) => x.id === uploadId);
+  if (item) item.status = 'procesando';
+  writeSiteData_(cfg, data, sha, 'Panel: reintentar publicar ' + uploadId);
+  data.__siteBaseUrl = cfg.siteBaseUrl;
+  return data;
+}
+
 function cancelPendingUpload(uploadId) {
   checkAccess_();
   const cfg = getConfig_();
