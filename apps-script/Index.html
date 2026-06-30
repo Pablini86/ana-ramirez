@@ -181,8 +181,8 @@
 
     function renderTabs() {
       const tabsEl = document.getElementById('tabs');
-      const tabs = [...SECTIONS.map((s) => s.key), 'brands', 'fotos', 'pendientes'];
-      const titles = { brands: 'Marcas (logos)', fotos: 'Fotos del sitio', pendientes: 'Pendientes' };
+      const tabs = [...SECTIONS.map((s) => s.key), 'brands', 'fotos', 'pendientes', 'textos'];
+      const titles = { brands: 'Marcas (logos)', fotos: 'Fotos del sitio', pendientes: 'Pendientes', textos: 'Textos' };
       tabsEl.innerHTML = tabs.map((k, i) =>
         '<div class="tab' + (i === 0 ? ' active' : '') + '" data-tab="' + k + '">' +
         (SECTIONS.find((s) => s.key === k) ? SECTIONS.find((s) => s.key === k).title : titles[k]) +
@@ -204,11 +204,13 @@
         SECTIONS.map((s, i) => videoPanelHtml(s, i === 0)).join('') +
         brandsPanelHtml() +
         photosPanelHtml() +
-        pendingPanelHtml();
+        pendingPanelHtml() +
+        textPanelHtml();
       SECTIONS.forEach((s) => attachVideoSectionEvents(s.key));
       attachBrandEvents();
       attachPhotoEvents();
       attachPendingEvents();
+      attachTextEvents();
     }
 
     function videoPanelHtml(section, active) {
@@ -475,6 +477,79 @@
         btn.addEventListener('click', (e) => {
           const id = e.target.closest('.pending-card').dataset.id;
           call('resetPendingStatus', [id], 'Puedes intentar publicar de nuevo');
+        });
+      });
+    }
+
+    /* ---------- Textos ---------- */
+    const TEXT_FIELDS = [
+      { group: 'Hero', fields: [
+        { key: 'heroBadge',         label: 'Badge (chip pequeño)',       type: 'input' },
+        { key: 'heroHeadline',      label: 'Titular (primera parte)',     type: 'input' },
+        { key: 'heroHeadlineAccent',label: 'Titular (parte en cursiva)',  type: 'input' },
+        { key: 'heroDesc',          label: 'Descripción',                 type: 'textarea' },
+        { key: 'heroStat1Val',      label: 'Estadística 1 — valor',      type: 'input' },
+        { key: 'heroStat1Label',    label: 'Estadística 1 — etiqueta',   type: 'input' },
+        { key: 'heroStat2Val',      label: 'Estadística 2 — valor',      type: 'input' },
+        { key: 'heroStat2Label',    label: 'Estadística 2 — etiqueta',   type: 'input' },
+      ]},
+      { group: 'Servicios', fields: [
+        { key: 'svc1Title', label: 'Servicio 1 — título',       type: 'input' },
+        { key: 'svc1Desc',  label: 'Servicio 1 — descripción',  type: 'textarea' },
+        { key: 'svc2Title', label: 'Servicio 2 — título',       type: 'input' },
+        { key: 'svc2Desc',  label: 'Servicio 2 — descripción',  type: 'textarea' },
+        { key: 'svc3Title', label: 'Servicio 3 — título',       type: 'input' },
+        { key: 'svc3Desc',  label: 'Servicio 3 — descripción',  type: 'textarea' },
+      ]},
+      { group: 'Sobre mí', fields: [
+        { key: 'sobreTitle', label: 'Título ("Hola, soy…")',  type: 'input' },
+        { key: 'sobrePara1', label: 'Párrafo 1',              type: 'textarea' },
+        { key: 'sobrePara2', label: 'Párrafo 2',              type: 'textarea' },
+      ]},
+      { group: 'Precios', fields: [
+        { key: 'precioUGC',    label: 'Precio UGC',    type: 'input' },
+        { key: 'precioPRO',    label: 'Precio PRO',    type: 'input' },
+        { key: 'precioEdicion',label: 'Precio Edición',type: 'input' },
+      ]},
+      { group: 'Contacto', fields: [
+        { key: 'contactTitle', label: 'Título',      type: 'input' },
+        { key: 'contactDesc',  label: 'Descripción', type: 'textarea' },
+      ]},
+    ];
+
+    function textPanelHtml() {
+      const texts = DATA.texts || {};
+      let html = '<div class="panel" id="panel-textos"><p class="section-title">Textos del sitio</p><p class="section-sub">Cada campo se guarda individualmente al hacer clic en Guardar.</p>';
+      TEXT_FIELDS.forEach(({ group, fields }) => {
+        html += '<div style="margin-top:20px;margin-bottom:6px;font-weight:700;font-size:13px;letter-spacing:1px;text-transform:uppercase;opacity:0.5;">' + group + '</div>';
+        fields.forEach(({ key, label, type }) => {
+          const val = escapeHtml(texts[key] || '');
+          const inputEl = type === 'textarea'
+            ? '<textarea id="txt-' + key + '" rows="3" style="width:100%;resize:vertical;font-size:14px;padding:8px;border:1px solid #E7E0D3;border-radius:8px;font-family:inherit;">' + val + '</textarea>'
+            : '<input id="txt-' + key + '" type="text" value="' + val + '" style="width:100%;font-size:14px;padding:8px;border:1px solid #E7E0D3;border-radius:8px;font-family:inherit;">';
+          html += '<div style="margin-bottom:14px;">' +
+            '<label style="display:block;font-size:13px;font-weight:600;margin-bottom:5px;opacity:0.75;">' + label + '</label>' +
+            inputEl +
+            '<button class="upload-btn" data-txt-key="' + key + '" style="margin-top:6px;padding:6px 14px;font-size:13px;">Guardar</button>' +
+          '</div>';
+        });
+      });
+      html += '</div>';
+      return html;
+    }
+
+    function attachTextEvents() {
+      document.querySelectorAll('#panel-textos [data-txt-key]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const key = btn.dataset.txtKey;
+          const el = document.getElementById('txt-' + key);
+          const value = el.value;
+          btn.disabled = true;
+          btn.textContent = 'Guardando…';
+          google.script.run
+            .withSuccessHandler((data) => { onData(data); showToast('Texto actualizado ✓'); btn.disabled = false; btn.textContent = 'Guardar'; })
+            .withFailureHandler((e) => { onError(e); btn.disabled = false; btn.textContent = 'Guardar'; })
+            .updateText(key, value);
         });
       });
     }

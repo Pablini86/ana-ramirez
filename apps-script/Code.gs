@@ -307,6 +307,17 @@ function publishPendingVideo(uploadId) {
   return data;
 }
 
+function updateText(key, value) {
+  checkAccess_();
+  const cfg = getConfig_();
+  const { data, sha } = readSiteData_(cfg);
+  data.texts = data.texts || {};
+  data.texts[key] = value;
+  writeSiteData_(cfg, data, sha, 'Panel: editar texto ' + key);
+  data.__siteBaseUrl = cfg.siteBaseUrl;
+  return data;
+}
+
 function resetPendingStatus(uploadId) {
   checkAccess_();
   const cfg = getConfig_();

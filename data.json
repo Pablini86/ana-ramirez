@@ -1,4 +1,28 @@
 {
+  "texts": {
+    "heroBadge": "Creadora & editora de video",
+    "heroHeadline": "Contenido que se siente real",
+    "heroHeadlineAccent": "y vende por ti.",
+    "heroDesc": "UGC a cámara, edición para marcas, empresas y profesionales, y videos branded sin locución. Yo me encargo de la idea, la grabación y la edición — tú solo publicas.",
+    "heroStat1Val": "+3 años",
+    "heroStat1Label": "creando contenido",
+    "heroStat2Val": "UGC + Edición",
+    "heroStat2Label": "todo en un solo lugar",
+    "svc1Title": "UGC a cámara",
+    "svc1Desc": "Aparezco yo. Reseñas, demos y testimonios auténticos tipo creador, grabados y editados listos para publicar en TikTok, Reels y anuncios.",
+    "svc2Title": "Edición de video",
+    "svc2Desc": "Me mandas tu material y yo lo convierto en algo que retiene: cortes, subtítulos, ritmo y branding. Ideal para marcas, empresas y profesionales.",
+    "svc3Title": "Videos branded sin locución",
+    "svc3Desc": "Contenido visual con música y texto en pantalla, sin voz. Perfecto para feed, anuncios y redes cuando la imagen habla por sí sola.",
+    "sobreTitle": "Hola, soy Anie",
+    "sobrePara1": "Creadora y editora de video. Ayudo a marcas, empresas y profesionales a comunicar con contenido orgánico y creativo.",
+    "sobrePara2": "Desde la idea hasta el video final, me encargo de todo — guión, grabación y edición — para que tú solo tengas que publicar.",
+    "precioUGC": "Desde $1,300",
+    "precioPRO": "Desde $3,000",
+    "precioEdicion": "Desde $500",
+    "contactTitle": "Hagamos tu próximo video",
+    "contactDesc": "Cuéntame de tu marca o proyecto y armamos algo que se sienta tuyo."
+  },
   "sitePhotos": {
     "hero": {
       "src": "fotos/galeria-2.jpg",
