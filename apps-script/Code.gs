@@ -286,7 +286,10 @@ function publishPendingVideo(uploadId) {
   try {
     DriveApp.getFileById(item.driveFileId).setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
   } catch (e) {
-    throw new Error('No se pudo preparar el archivo en Drive: ' + e.message);
+    // No bloquea la publicación: si la carpeta de pendientes ya está compartida como
+    // "Cualquiera con el enlace", el archivo es accesible aunque no se pueda cambiar
+    // su permiso individual (pasa cuando quien sube el video y quien publica son
+    // cuentas distintas y no es la propietaria del archivo).
   }
 
   item.status = 'publicando';

@@ -36,8 +36,10 @@ El token nunca debe pegarse en el código ni compartirse en chat — solo va aqu
 ## 4. Carpeta de Drive para videos crudos
 
 1. En Google Drive, crea una carpeta llamada por ejemplo "Ana — videos pendientes".
-2. Ábrela y copia el ID de la URL: `https://drive.google.com/drive/folders/`**`ESTE_ID`**.
-3. Pega ese ID en la propiedad `DRIVE_PENDING_FOLDER_ID` del paso 3.
+2. Comparte esa carpeta con la cuenta de Ana (Editor) para que pueda subir videos.
+3. Clic derecho → **Compartir** → **Acceso general** → cambia a **"Cualquier persona con el enlace"** → rol **Lector**. Esto evita errores de permisos al publicar (sin esto, "Publicar" puede fallar con "Acceso denegado" si quien sube el video y quien publica son cuentas distintas).
+4. Ábrela y copia el ID de la URL: `https://drive.google.com/drive/folders/`**`ESTE_ID`**.
+5. Pega ese ID en la propiedad `DRIVE_PENDING_FOLDER_ID` del paso 3.
 
 ## 5. Secret de GitHub para publicar videos automáticamente
 
