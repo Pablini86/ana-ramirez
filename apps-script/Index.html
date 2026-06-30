@@ -64,30 +64,30 @@
       font-size: 13px;
       width: 100%;
     }
-    .row { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
-    .btn-group { display: flex; gap: 4px; }
+    .row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .btn-group { display: flex; gap: 6px; align-items: center; }
     button.icon-btn {
       border: 1px solid #E7E0D3;
       background: #fff;
-      border-radius: 6px;
-      width: 28px;
-      height: 28px;
+      border-radius: 8px;
+      width: 38px;
+      height: 38px;
       cursor: pointer;
-      font-size: 13px;
+      font-size: 16px;
     }
     button.icon-btn:hover { background: var(--accent-light); }
-    .switch { position: relative; display: inline-block; width: 38px; height: 22px; flex-shrink: 0; }
+    .switch { position: relative; display: inline-block; width: 46px; height: 26px; flex-shrink: 0; }
     .switch input { opacity: 0; width: 0; height: 0; }
     .slider {
       position: absolute; cursor: pointer; inset: 0;
-      background-color: #ccc; border-radius: 22px; transition: .2s;
+      background-color: #ccc; border-radius: 26px; transition: .2s;
     }
     .slider:before {
-      position: absolute; content: ""; height: 16px; width: 16px;
+      position: absolute; content: ""; height: 20px; width: 20px;
       left: 3px; bottom: 3px; background-color: white; border-radius: 50%; transition: .2s;
     }
     input:checked + .slider { background-color: var(--accent); }
-    input:checked + .slider:before { transform: translateX(16px); }
+    input:checked + .slider:before { transform: translateX(20px); }
     .upload-btn {
       display: inline-block;
       margin-top: 12px;
@@ -100,7 +100,7 @@
       border: none;
     }
     .upload-btn:disabled { opacity: 0.5; cursor: default; }
-    .delete-btn { color: var(--danger); font-size: 12px; background: none; border: none; cursor: pointer; }
+    .delete-btn { color: var(--danger); font-size: 13px; background: none; border: none; cursor: pointer; padding: 8px 4px; }
     .pending-card { background: #FFF8E6; border: 1px solid #F0DDA0; border-radius: 10px; padding: 12px 14px; margin-bottom: 10px; }
     .pending-card .row { margin-bottom: 4px; }
     .badge { font-size: 11px; background: #F0DDA0; padding: 2px 8px; border-radius: 999px; }
@@ -229,8 +229,9 @@
 
     function videoCardHtml(sectionKey, v) {
       const src = BASE_URL + v.src;
+      const poster = v.poster ? ' poster="' + BASE_URL + v.poster + '"' : '';
       return '<div class="card' + (v.visible === false ? ' hidden-item' : '') + '" data-id="' + v.id + '">' +
-        '<video class="thumb" src="' + src + '" muted preload="metadata"></video>' +
+        '<video class="thumb" src="' + src + '"' + poster + ' muted playsinline preload="metadata"></video>' +
         '<div class="card-body">' +
         '  <input type="text" value="' + escapeHtml(v.label) + '" data-action="label">' +
         '  <div class="row">' +

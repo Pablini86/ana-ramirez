@@ -59,6 +59,18 @@ def main():
     ]
     subprocess.run(cmd, check=True)
 
+    poster_path = 'videos/' + video_id + '.jpg'
+    poster_cmd = [
+        'ffmpeg', '-y', '-i', out_path,
+        '-vf', 'scale=480:-2',
+        '-frames:v', '1',
+        poster_path,
+    ]
+    try:
+        subprocess.run(poster_cmd, check=True)
+    except subprocess.CalledProcessError:
+        poster_path = ''
+
     max_order = max([item.get('order', 0) for item in section_list], default=0)
     section_list.append({
         'id': video_id,
@@ -66,7 +78,7 @@ def main():
         'label': args.label,
         'visible': True,
         'order': max_order + 1,
-        'poster': '',
+        'poster': poster_path,
     })
     data['portfolio'][args.section] = section_list
 
