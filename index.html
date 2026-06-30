@@ -35,8 +35,8 @@
   @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
   ::selection { background: var(--soft, oklch(0.90 0.045 40)); }
 
-  .video-scroll { max-height: 520px; overflow-y: auto; padding-right: 8px; scrollbar-width: thin; }
-  .video-scroll::-webkit-scrollbar { width: 6px; }
+  .video-scroll { overflow-x: auto; overflow-y: hidden; padding-bottom: 14px; scrollbar-width: thin; }
+  .video-scroll::-webkit-scrollbar { height: 6px; }
   .video-scroll::-webkit-scrollbar-thumb { background: rgba(33,29,24,0.25); border-radius: 10px; }
 
   /* ===== TABLET ===== */
@@ -45,13 +45,13 @@
     #inicio .hero-copy { display: flex; flex-direction: column; align-items: center; order: 2; }
     #inicio .hero-photo { order: 1; margin-bottom: 8px; }
     .grid-3 { grid-template-columns: 1fr 1fr !important; }
-    .grid-4 { grid-template-columns: 1fr 1fr !important; }
+
     .sobre-grid { grid-template-columns: 1fr !important; text-align: center; }
     .sobre-grid .sobre-copy { display: flex; flex-direction: column; align-items: center; }
     .conoce-grid { grid-template-columns: 1fr !important; }
     .price-pro { transform: none !important; }
     .nav-links a.nav-page { display: none; }
-    .video-scroll { max-height: 640px; }
+    .video-scroll { overflow-x: auto; }
   }
 
   /* ===== MÓVIL ===== */
@@ -61,7 +61,7 @@
     .hero-photo-img { width: min(340px, 86vw) !important; }
     .mini-clip { right: -8px !important; width: 96px !important; }
     .hero-badge { left: -6px !important; }
-    .video-scroll { max-height: 760px; }
+    .video-scroll { overflow-x: auto; }
     .contact-links { display: grid !important; grid-template-columns: 1fr 1fr; justify-content: stretch !important; }
     .contact-links a { width: 100%; }
   }
@@ -181,9 +181,9 @@
       <span style="flex:1; height:1px; background:rgba(33,29,24,0.1);"></span>
     </div>
     <div class="video-scroll">
-    <div class="grid-4" style="display:grid; grid-template-columns:repeat(4,1fr); gap:18px;">
+    <div style="display:flex; gap:18px; align-items:flex-start;">
       <sc-for list="{{ ugcVideos }}" as="v" hint-placeholder-count="3">
-        <div style="display:flex; flex-direction:column; gap:10px;">
+        <div style="display:flex; flex-direction:column; gap:10px; width:180px; flex-shrink:0;">
           <div onMouseEnter="{{ playVid }}" onMouseLeave="{{ pauseVid }}" onClick="{{ toggleSound }}" style="position:relative; aspect-ratio:9/16; border-radius:18px; overflow:hidden; background:#000; border:1px solid rgba(33,29,24,0.06); box-shadow:0 14px 30px -18px rgba(33,29,24,0.35); cursor:pointer;">
             <video src="{{ v.src }}" poster="{{ v.poster }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;"></video>
             <div style="position:absolute; right:10px; bottom:10px; width:30px; height:30px; border-radius:50%; background:rgba(0,0,0,0.45); backdrop-filter:blur(4px); display:flex; align-items:center; justify-content:center; pointer-events:none;">
@@ -202,9 +202,9 @@
       <span style="flex:1; height:1px; background:rgba(33,29,24,0.1);"></span>
     </div>
     <div class="video-scroll">
-    <div class="grid-4" style="display:grid; grid-template-columns:repeat(4,1fr); gap:18px;">
+    <div style="display:flex; gap:18px; align-items:flex-start;">
       <sc-for list="{{ marcaPersonalVideos }}" as="p" hint-placeholder-count="3">
-        <div style="display:flex; flex-direction:column; gap:10px;">
+        <div style="display:flex; flex-direction:column; gap:10px; width:180px; flex-shrink:0;">
           <div onMouseEnter="{{ playVid }}" onMouseLeave="{{ pauseVid }}" onClick="{{ toggleSound }}" style="position:relative; aspect-ratio:9/16; border-radius:18px; overflow:hidden; background:#000; border:1px solid rgba(33,29,24,0.06); box-shadow:0 14px 30px -18px rgba(33,29,24,0.35); cursor:pointer;">
             <video src="{{ p.src }}" poster="{{ p.poster }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;"></video>
             <div style="position:absolute; right:10px; bottom:10px; width:30px; height:30px; border-radius:50%; background:rgba(0,0,0,0.45); backdrop-filter:blur(4px); display:flex; align-items:center; justify-content:center; pointer-events:none;">
@@ -223,9 +223,9 @@
       <span style="flex:1; height:1px; background:rgba(33,29,24,0.1);"></span>
     </div>
     <div class="video-scroll">
-    <div class="grid-4" style="display:grid; grid-template-columns:repeat(4,1fr); gap:18px;">
+    <div style="display:flex; gap:18px; align-items:flex-start;">
       <sc-for list="{{ marcaVideos }}" as="m" hint-placeholder-count="3">
-        <div style="display:flex; flex-direction:column; gap:10px;">
+        <div style="display:flex; flex-direction:column; gap:10px; width:180px; flex-shrink:0;">
           <div onMouseEnter="{{ playVid }}" onMouseLeave="{{ pauseVid }}" onClick="{{ toggleSound }}" style="position:relative; aspect-ratio:9/16; border-radius:18px; overflow:hidden; background:#000; border:1px solid rgba(33,29,24,0.06); box-shadow:0 14px 30px -18px rgba(33,29,24,0.35); cursor:pointer;">
             <video src="{{ m.src }}" poster="{{ m.poster }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;"></video>
             <div style="position:absolute; right:10px; bottom:10px; width:30px; height:30px; border-radius:50%; background:rgba(0,0,0,0.45); backdrop-filter:blur(4px); display:flex; align-items:center; justify-content:center; pointer-events:none;">
