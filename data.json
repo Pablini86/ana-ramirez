@@ -57,7 +57,7 @@
         "label": "Waterly",
         "visible": true,
         "order": 1,
-        "poster": ""
+        "poster": "videos/ugc-waterly.jpg"
       },
       {
         "id": "ugc-etam",
@@ -65,7 +65,7 @@
         "label": "Try-on Etam",
         "visible": true,
         "order": 2,
-        "poster": ""
+        "poster": "videos/ugc-etam.jpg"
       },
       {
         "id": "ugc-deargut",
@@ -73,7 +73,7 @@
         "label": "Reseña Dear Gut",
         "visible": true,
         "order": 3,
-        "poster": ""
+        "poster": "videos/ugc-deargut.jpg"
       },
       {
         "id": "ugc-soon",
@@ -81,7 +81,7 @@
         "label": "SOON",
         "visible": true,
         "order": 4,
-        "poster": ""
+        "poster": "videos/ugc-soon.jpg"
       },
       {
         "id": "ugc-educacion",
@@ -89,7 +89,7 @@
         "label": "Educación",
         "visible": true,
         "order": 5,
-        "poster": ""
+        "poster": "videos/ugc-educacion.jpg"
       },
       {
         "id": "ugc-unas",
@@ -97,7 +97,7 @@
         "label": "Uñas",
         "visible": true,
         "order": 6,
-        "poster": ""
+        "poster": "videos/ugc-unas.jpg"
       },
       {
         "id": "ugc-crea",
@@ -105,7 +105,7 @@
         "label": "Crea",
         "visible": true,
         "order": 7,
-        "poster": ""
+        "poster": "videos/ugc-crea.jpg"
       },
       {
         "id": "ugc-supersalads",
@@ -113,7 +113,7 @@
         "label": "Super Salads",
         "visible": true,
         "order": 8,
-        "poster": ""
+        "poster": "videos/ugc-supersalads.jpg"
       },
       {
         "id": "ugc-bazar",
@@ -121,7 +121,7 @@
         "label": "Bazar",
         "visible": true,
         "order": 9,
-        "poster": ""
+        "poster": "videos/ugc-bazar.jpg"
       },
       {
         "id": "ugc-lomaira",
@@ -129,7 +129,7 @@
         "label": "Lomaira",
         "visible": true,
         "order": 10,
-        "poster": ""
+        "poster": "videos/ugc-lomaira.jpg"
       },
       {
         "id": "ugc-casapalina",
@@ -137,7 +137,7 @@
         "label": "Casa Palina",
         "visible": true,
         "order": 11,
-        "poster": ""
+        "poster": "videos/ugc-casapalina.jpg"
       }
     ],
     "marcaPersonal": [
@@ -147,7 +147,7 @@
         "label": "Crea Caro",
         "visible": true,
         "order": 2,
-        "poster": ""
+        "poster": "videos/mp-crea-caro.jpg"
       },
       {
         "id": "mp-mama-mariana",
@@ -155,7 +155,7 @@
         "label": "Mamá Mariana",
         "visible": true,
         "order": 1,
-        "poster": ""
+        "poster": "videos/mp-mama-mariana.jpg"
       },
       {
         "id": "mp-academia-musical",
@@ -163,7 +163,7 @@
         "label": "Academia musical",
         "visible": true,
         "order": 3,
-        "poster": ""
+        "poster": "videos/mp-academia-musical.jpg"
       },
       {
         "id": "mp-eli",
@@ -179,7 +179,7 @@
         "label": "Dr. Alexander",
         "visible": true,
         "order": 5,
-        "poster": ""
+        "poster": "videos/mp-dr-alexander.jpg"
       },
       {
         "id": "mp-psicologa-infantil",
@@ -187,7 +187,7 @@
         "label": "Psicóloga infantil",
         "visible": true,
         "order": 6,
-        "poster": ""
+        "poster": "videos/mp-psicologa-infantil.jpg"
       },
       {
         "id": "mp-expo-ebio",
@@ -195,7 +195,7 @@
         "label": "Expo EBIO",
         "visible": true,
         "order": 7,
-        "poster": ""
+        "poster": "videos/mp-expo-ebio.jpg"
       },
       {
         "id": "mp-georgina-ballesteros",
@@ -203,7 +203,7 @@
         "label": "Georgina Ballesteros",
         "visible": true,
         "order": 8,
-        "poster": ""
+        "poster": "videos/mp-georgina-ballesteros.jpg"
       }
     ],
     "marcaVideos": [
@@ -213,7 +213,7 @@
         "label": "SOON Workout Studio",
         "visible": true,
         "order": 1,
-        "poster": ""
+        "poster": "videos/vm-soon.jpg"
       },
       {
         "id": "vm-heladeria",
@@ -221,7 +221,7 @@
         "label": "Heladería",
         "visible": true,
         "order": 2,
-        "poster": ""
+        "poster": "videos/vm-heladeria.jpg"
       },
       {
         "id": "vm-marca",
@@ -229,7 +229,7 @@
         "label": "Video de marca",
         "visible": true,
         "order": 3,
-        "poster": ""
+        "poster": "videos/vm-marca.jpg"
       },
       {
         "id": "vm-help",
@@ -237,7 +237,7 @@
         "label": "VM Help",
         "visible": true,
         "order": 4,
-        "poster": ""
+        "poster": "videos/vm-help.jpg"
       }
     ]
   },

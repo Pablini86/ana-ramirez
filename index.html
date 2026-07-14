@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +12,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Ana">
-<meta name="theme-color" content="#CA6950">
+<meta name="theme-color" content="#6F8F4E">
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://anaballesteros.site/">
@@ -60,6 +60,7 @@
     .price-pro { transform: none !important; }
     .nav-links a.nav-page { display: none; }
     .video-scroll { overflow-x: auto; }
+    .grid-4 { grid-template-columns: repeat(3,1fr) !important; }
   }
 
   /* ===== MÓVIL ===== */
@@ -72,6 +73,7 @@
     .video-scroll { overflow-x: auto; }
     .contact-links { display: grid !important; grid-template-columns: 1fr 1fr; justify-content: stretch !important; }
     .contact-links a { width: 100%; }
+    .grid-4 { grid-template-columns: repeat(2,1fr) !important; }
   }
 </style>
 </helmet>
@@ -423,33 +425,33 @@ const DEFAULT_SITE_DATA = {
   },
   portfolio: {
     ugc: [
-      { src: 'videos/ugc-waterly.mp4', label: 'Waterly' },
-      { src: 'videos/ugc-etam.mp4', label: 'Try-on Etam' },
-      { src: 'videos/ugc-deargut.mp4', label: 'Reseña Dear Gut' },
-      { src: 'videos/ugc-soon.mp4', label: 'SOON' },
-      { src: 'videos/ugc-educacion.mp4', label: 'Educación' },
-      { src: 'videos/ugc-unas.mp4', label: 'Uñas' },
-      { src: 'videos/ugc-crea.mp4', label: 'Crea' },
-      { src: 'videos/ugc-supersalads.mp4', label: 'Super Salads' },
-      { src: 'videos/ugc-bazar.mp4', label: 'Bazar' },
-      { src: 'videos/ugc-lomaira.mp4', label: 'Lomaira' },
-      { src: 'videos/ugc-casapalina.mp4', label: 'Casa Palina' },
+      { src: 'videos/ugc-waterly.mp4', label: 'Waterly', poster: 'videos/ugc-waterly.jpg' },
+      { src: 'videos/ugc-etam.mp4', label: 'Try-on Etam', poster: 'videos/ugc-etam.jpg' },
+      { src: 'videos/ugc-deargut.mp4', label: 'Reseña Dear Gut', poster: 'videos/ugc-deargut.jpg' },
+      { src: 'videos/ugc-soon.mp4', label: 'SOON', poster: 'videos/ugc-soon.jpg' },
+      { src: 'videos/ugc-educacion.mp4', label: 'Educación', poster: 'videos/ugc-educacion.jpg' },
+      { src: 'videos/ugc-unas.mp4', label: 'Uñas', poster: 'videos/ugc-unas.jpg' },
+      { src: 'videos/ugc-crea.mp4', label: 'Crea', poster: 'videos/ugc-crea.jpg' },
+      { src: 'videos/ugc-supersalads.mp4', label: 'Super Salads', poster: 'videos/ugc-supersalads.jpg' },
+      { src: 'videos/ugc-bazar.mp4', label: 'Bazar', poster: 'videos/ugc-bazar.jpg' },
+      { src: 'videos/ugc-lomaira.mp4', label: 'Lomaira', poster: 'videos/ugc-lomaira.jpg' },
+      { src: 'videos/ugc-casapalina.mp4', label: 'Casa Palina', poster: 'videos/ugc-casapalina.jpg' },
     ],
     marcaPersonal: [
-      { src: 'videos/mp-crea-caro.mp4', label: 'Crea Caro' },
-      { src: 'videos/mp-mama-mariana.mp4', label: 'Mamá Mariana' },
-      { src: 'videos/mp-academia-musical.mp4', label: 'Academia musical' },
-      { src: 'videos/mp-eli.mp4', label: 'Eli' },
-      { src: 'videos/mp-dr-alexander.mp4', label: 'Dr. Alexander' },
-      { src: 'videos/mp-psicologa-infantil.mp4', label: 'Psicóloga infantil' },
-      { src: 'videos/mp-expo-ebio.mp4', label: 'Expo EBIO' },
-      { src: 'videos/mp-georgina-ballesteros.mp4', label: 'Georgina Ballesteros' },
+      { src: 'videos/mp-crea-caro.mp4', label: 'Crea Caro', poster: 'videos/mp-crea-caro.jpg' },
+      { src: 'videos/mp-mama-mariana.mp4', label: 'Mamá Mariana', poster: 'videos/mp-mama-mariana.jpg' },
+      { src: 'videos/mp-academia-musical.mp4', label: 'Academia musical', poster: 'videos/mp-academia-musical.jpg' },
+      { src: 'videos/mp-eli.mp4', label: 'Eli', poster: 'videos/mp-eli.jpg' },
+      { src: 'videos/mp-dr-alexander.mp4', label: 'Dr. Alexander', poster: 'videos/mp-dr-alexander.jpg' },
+      { src: 'videos/mp-psicologa-infantil.mp4', label: 'Psicóloga infantil', poster: 'videos/mp-psicologa-infantil.jpg' },
+      { src: 'videos/mp-expo-ebio.mp4', label: 'Expo EBIO', poster: 'videos/mp-expo-ebio.jpg' },
+      { src: 'videos/mp-georgina-ballesteros.mp4', label: 'Georgina Ballesteros', poster: 'videos/mp-georgina-ballesteros.jpg' },
     ],
     marcaVideos: [
-      { src: 'videos/vm-soon.mp4', label: 'SOON Workout Studio' },
-      { src: 'videos/vm-heladeria.mp4', label: 'Heladería' },
-      { src: 'videos/vm-marca.mp4', label: 'Video de marca' },
-      { src: 'videos/vm-help.mp4', label: 'VM Help' },
+      { src: 'videos/vm-soon.mp4', label: 'SOON Workout Studio', poster: 'videos/vm-soon.jpg' },
+      { src: 'videos/vm-heladeria.mp4', label: 'Heladería', poster: 'videos/vm-heladeria.jpg' },
+      { src: 'videos/vm-marca.mp4', label: 'Video de marca', poster: 'videos/vm-marca.jpg' },
+      { src: 'videos/vm-help.mp4', label: 'VM Help', poster: 'videos/vm-help.jpg' },
     ],
   },
   texts: {
