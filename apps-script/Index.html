@@ -39,6 +39,11 @@
       border: 1px solid #E7E0D3;
       cursor: pointer;
       font-size: 13px;
+      white-space: nowrap;
+    }
+    @media (max-width: 700px) {
+      .tabs { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 6px; }
+      .tab { flex-shrink: 0; }
     }
     .tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
     .panel { display: none; }
@@ -119,6 +124,17 @@
     .photo-card .card-body { padding: 10px 12px; }
     .empty-msg { color: var(--muted); font-size: 13px; padding: 20px 0; }
     .loading { text-align: center; padding: 60px 0; color: var(--muted); }
+    .text-group { background: var(--card); border: 1px solid #E7E0D3; border-radius: 12px; margin-top: 14px; overflow: hidden; }
+    .text-group summary {
+      cursor: pointer; padding: 14px 16px; font-weight: 700; font-size: 13px;
+      letter-spacing: 1px; text-transform: uppercase; opacity: 0.7; list-style: none;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .text-group summary::-webkit-details-marker { display: none; }
+    .text-group summary::after { content: '+'; font-size: 18px; font-weight: 400; opacity: 0.6; }
+    .text-group[open] summary::after { content: '\2212'; }
+    .text-group[open] summary { border-bottom: 1px solid #E7E0D3; }
+    .text-group-body { padding: 14px 16px 4px; }
   </style>
 </head>
 <body>
@@ -519,9 +535,11 @@
 
     function textPanelHtml() {
       const texts = DATA.texts || {};
-      let html = '<div class="panel" id="panel-textos"><p class="section-title">Textos del sitio</p><p class="section-sub">Cada campo se guarda individualmente al hacer clic en Guardar.</p>';
-      TEXT_FIELDS.forEach(({ group, fields }) => {
-        html += '<div style="margin-top:20px;margin-bottom:6px;font-weight:700;font-size:13px;letter-spacing:1px;text-transform:uppercase;opacity:0.5;">' + group + '</div>';
+      let html = '<div class="panel" id="panel-textos"><p class="section-title">Textos del sitio</p><p class="section-sub">Cada campo se guarda individualmente al hacer clic en Guardar. Toca un grupo para abrirlo.</p>';
+      TEXT_FIELDS.forEach(({ group, fields }, gi) => {
+        html += '<details class="text-group"' + (gi === 0 ? ' open' : '') + '>' +
+          '<summary>' + group + '</summary>' +
+          '<div class="text-group-body">';
         fields.forEach(({ key, label, type }) => {
           const val = escapeHtml(texts[key] || '');
           const inputEl = type === 'textarea'
@@ -533,6 +551,7 @@
             '<button class="upload-btn" data-txt-key="' + key + '" style="margin-top:6px;padding:6px 14px;font-size:13px;">Guardar</button>' +
           '</div>';
         });
+        html += '</div></details>';
       });
       html += '</div>';
       return html;
